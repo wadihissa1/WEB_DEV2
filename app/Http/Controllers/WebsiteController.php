@@ -29,4 +29,8 @@ class WebsiteController extends Controller
     {
         return view('product_details');
     }
+    public function getprofile()
+    {
+        return view('profile');
+    }
 }

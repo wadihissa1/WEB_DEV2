@@ -21,11 +21,11 @@
             </div>
             <nav>
                 <ul id="MenuItems">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="products.html">Products</a></li>
+                    <li><a href="{{ route('index') }}">Home</a></li>
+                    <li><a href="{{ route('product') }}">Products</a></li>
                     <li><a href="">About</a></li>
                     <li><a href="">Contact</a></li>
-                    <li><a href="account.html">Account</a></li>
+                    <li><a href="{{ route('account') }}">Account</a></li>
                 </ul>
             </nav>
             <a href="cart.html"><img src="images/cart.png" width="30px" height="30px"></a>

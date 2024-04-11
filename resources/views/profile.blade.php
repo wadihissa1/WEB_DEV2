@@ -45,31 +45,23 @@
                         <span onclick="register()">Register</span>
                         <hr id="Indicator">
                     </div>
-                    <form id="LoginForm" method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('profile.update', ['userId' => $user->id]) }}">
                         @csrf
-                        <input type="email" id="email" name="email" placeholder="Enter Email">
+                        @method('PUT')
 
-                        <input type="password" id="password1" name="password" placeholder="Enter Password">
-                        <button type="submit" class="btn">Login</button>
-                        <a href="#">Forget Password</a>
-                        <a href="{{ route('auth/google') }}">  Sign in with Google</a>
+                        <div>
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" >
 
+                        <div>
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+
+                        <!-- Add input fields for other user information -->
+
+                        <button type="submit">Update Profile</button>
                     </form>
-
-                    <form id="RegForm" method="POST" action="/register">
-                        @csrf
-                        <input type="text" id="name" name="name" placeholder="Enter Name">
-
-                        <input type="email" id="email" name="email" placeholder="Enter Email">
-
-                        <input type="password" id="password" name="password" placeholder="Enter Password">
-                        <select id="role" name="role">
-                            <option value="buyer">Buyer</option>
-                            <option value="seller">Seller</option>
-                        </select>
-                        <button type="submit" class="btn">Register</button>
-                    </form>
-
                 </div>
             </div>
         </div>
