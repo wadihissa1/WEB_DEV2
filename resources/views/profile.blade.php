@@ -41,30 +41,26 @@
             <div class="col-2">
                 <div class="form-container">
                     <div class="form-btn">
-                        <span onclick="login()">Login</span>
-                        <span onclick="register()">Register</span>
+                        <span onclick="login()">Edit Your Profile</span>
                         <hr id="Indicator">
                     </div>
-<<<<<<< Updated upstream
-                    <form id="LoginForm">
-                        <input type="text" placeholder="Username">
-                        <input type="password" placeholder="Password">
-=======
-                    <form id="LoginForm" method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('profile.update', ['userId' => $user->id]) }}">
+                        @csrf
+                        @method('PUT')
 
-                        <input type="email" id="email" name="email" placeholder="Enter Email">
+                        <div>
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" >
 
-                        <input type="password" id="password1" name="password" placeholder="Enter Password">
->>>>>>> Stashed changes
-                        <button type="submit" class="btn">Login</button>
-                        <a href="">Forget Password</a>
-                    </form>
+                        <div>
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email">
+                        </div>
 
-                    <form id="RegForm">
-                        <input type="text" placeholder="Username">
-                        <input type="email" placeholder="Email">
-                        <input type="password" placeholder="Password">
-                        <button type="submit" class="btn">Register</button>
+                        <!-- Add input fields for other user information -->
+
+                        <button type="submit">Update Profile</button>
+                        </div>
                     </form>
                 </div>
             </div>
