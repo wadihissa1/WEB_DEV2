@@ -57,6 +57,7 @@ class LoginController extends Controller
             $newUser = new User();
             $newUser->name = $googleUser->getName();
             $newUser->email = $googleUser->getEmail();
+            $newUser->verified = true;
             // You may want to set a random password or leave it empty depending on your application's requirements
             $newUser->password = bcrypt(1234);
             // Alternatively, you can redirect the user to a page to set their password after registration

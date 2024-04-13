@@ -30,5 +30,6 @@ Route::get('auth/google/callback', 'App\Http\Controllers\LoginController@handleG
 Route::get('/profile/{userId}/edit', 'App\Http\Controllers\ProfileController@edit')->name('profile.edit');
 Route::put('/profile/{userId}/update', 'App\Http\Controllers\ProfileController@update')->name('profile.update');
 Route::get("profile",'App\Http\Controllers\WebsiteController@getprofile')->name('profile');
+Route::get('verify/email/{token}', 'App\Http\Controllers\VerificationController@verifyEmail')->name('email.verify');
 
 
