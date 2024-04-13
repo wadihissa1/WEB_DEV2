@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,6 +29,6 @@ Route::get('auth/google', 'App\Http\Controllers\LoginController@redirectToGoogle
 Route::get('auth/google/callback', 'App\Http\Controllers\LoginController@handleGoogleCallback')->name('auth/google/callback');
 Route::get('/profile/{userId}/edit', 'App\Http\Controllers\ProfileController@edit')->name('profile.edit');
 Route::put('/profile/{userId}/update', 'App\Http\Controllers\ProfileController@update')->name('profile.update');
-Route::put("profile",'App\Http\Controllers\WebsiteController@getprofile')->name('profile');
+Route::get("profile",'App\Http\Controllers\WebsiteController@getprofile')->name('profile');
 
 

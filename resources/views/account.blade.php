@@ -45,27 +45,33 @@
                         <span onclick="register()">Register</span>
                         <hr id="Indicator">
                     </div>
-<<<<<<< Updated upstream
-                    <form id="LoginForm">
-                        <input type="text" placeholder="Username">
-                        <input type="password" placeholder="Password">
-=======
-                    <form id="LoginForm" method="POST" action="{{ route('login') }}">
 
+
+                    <form id="LoginForm" method="POST" action="{{ route('login') }}">
+                        @csrf
                         <input type="email" id="email" name="email" placeholder="Enter Email">
 
                         <input type="password" id="password1" name="password" placeholder="Enter Password">
->>>>>>> Stashed changes
                         <button type="submit" class="btn">Login</button>
-                        <a href="">Forget Password</a>
+                        <a href="#">Forget Password</a>
+                        <a href="{{ route('auth/google') }}">  Sign in with Google</a>
+
                     </form>
 
-                    <form id="RegForm">
-                        <input type="text" placeholder="Username">
-                        <input type="email" placeholder="Email">
-                        <input type="password" placeholder="Password">
+                    <form id="RegForm" method="POST" action="/register">
+                        @csrf
+                        <input type="text" id="name" name="name" placeholder="Enter Name">
+
+                        <input type="email" id="email" name="email" placeholder="Enter Email">
+
+                        <input type="password" id="password" name="password" placeholder="Enter Password">
+                        <select id="role" name="role">
+                            <option value="buyer">Buyer</option>
+                            <option value="seller">Seller</option>
+                        </select>
                         <button type="submit" class="btn">Register</button>
                     </form>
+
                 </div>
             </div>
         </div>

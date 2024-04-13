@@ -20,7 +20,7 @@ class ProfileController extends Controller
         }
 
         // Pass the user information to the view
-        return view('profile', compact('user'));
+        return view('profile.edit', compact('user'));
     }
     public function update(Request $request, $userId)
     {
