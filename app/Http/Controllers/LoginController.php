@@ -18,16 +18,24 @@ class LoginController extends Controller
         ]);
         $user = User::where('email', $request->email)->first();
 
-        if($user){
+        if ($user) {
             if (password_verify($request->password, $user->password)) {
-
-                return redirect('/index')->with('success', 'Login successful!');
+                if ($user->verified) {
+                    // If the user is verified, log them in
+                    return redirect('/index')->with('success', 'Login successful!');
+                } else {
+                    // If the user is not verified, redirect them back with an error message
+                    return redirect()->back()->withErrors(['login_failed' => 'Your account is not verified. Please verify your email before logging in.']);
+                }
+            }
         }
-        }
 
-
+        // If the email or password is incorrect, redirect them back with an error message
         return redirect()->back()->withErrors(['login_failed' => 'Invalid email or password']);
     }
+
+
+
 
     public function redirectToGoogle()
     {
@@ -51,7 +59,7 @@ class LoginController extends Controller
             // If the user already exists, log them in
             Log::info('Existing User Details:', $existingUser->toArray());
             Auth::login($existingUser);
-            return redirect('/home')->with('success', 'Logged in successfully!');
+            return redirect('/index')->with('success', 'Logged in successfully!');
         } else {
             // If the user doesn't exist, create a new user account
             $newUser = new User();
