@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\WebsiteController;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -26,6 +26,6 @@ class VerificationController extends Controller
         // Auth::login($user);
 
         // Redirect the user to a page indicating successful verification
-        return "Email verification successful!";
+        return redirect()->route('product' ,['id' => $user->id]);
     }
 }
