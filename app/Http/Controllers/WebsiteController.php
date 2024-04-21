@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use PhpParser\Builder\Function_;
 use SebastianBergmann\Template\Template;
@@ -10,6 +11,7 @@ class WebsiteController extends Controller
 {
     public function getindex()
     {
+
         return view('index');
     }
     public function getaccount()
@@ -21,9 +23,12 @@ class WebsiteController extends Controller
         return view('cart');
     }
 
-    public function getproduct()
+    public function getproduct($id)
     {
-        return view('product');
+        $user = User::find($id);
+
+        // Return the product view
+        return view('product', ['userId' => $user]);
     }
     public function getproduct_details()
     {

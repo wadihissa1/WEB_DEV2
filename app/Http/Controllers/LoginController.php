@@ -22,7 +22,7 @@ class LoginController extends Controller
             if (password_verify($request->password, $user->password)) {
                 if ($user->verified) {
                     // If the user is verified, log them in
-                    return redirect('/index')->with('success', 'Login successful!');
+                    return redirect()->route('product' ,['id' => $user->id]);
                 } else {
                     // If the user is not verified, redirect them back with an error message
                     return redirect()->back()->withErrors(['login_failed' => 'Your account is not verified. Please verify your email before logging in.']);
@@ -46,8 +46,8 @@ class LoginController extends Controller
     {
         try {
             $googleUser = Socialite::driver('google')->user();
-            dd($googleUser);
         } catch (\Exception $e) {
+            dd($e);
             Log::error('Google OAuth ClientException: ' . $e->getMessage());
             return redirect('/account')->withErrors(['error' => 'Google login failed.']);
         }
@@ -59,7 +59,7 @@ class LoginController extends Controller
             // If the user already exists, log them in
             Log::info('Existing User Details:', $existingUser->toArray());
             Auth::login($existingUser);
-            return redirect('/index')->with('success', 'Logged in successfully!');
+            return redirect()->route('product' ,['id' => $existingUser->id]);
         } else {
             // If the user doesn't exist, create a new user account
             $newUser = new User();
@@ -75,7 +75,7 @@ class LoginController extends Controller
             // Log in the newly created user
             Auth::login($newUser);
 
-            return redirect('/product')->with('success', 'Registered and logged in successfully!');
+            return redirect()->route('product' ,['id' => $newUser->id]);
         }
     }
 }

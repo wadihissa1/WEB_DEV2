@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Products | RedStore</title>
+    <title>Account | RedStore</title>
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
           rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -15,18 +16,17 @@
 <div class="container">
     <div class="navbar">
         <div class="logo">
-            <a href="index.html"><img src="images/logo.png" alt="logo" width="125px"></a>
+            <a href="{{ route('index') }}"><img src="images/logo.png" alt="logo" width="125px"></a>
         </div>
         <nav>
             <ul id="MenuItems">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="products.html">Products</a></li>
+                <li><a href="{{ route('index') }}">Home</a></li>
                 <li><a href="">About</a></li>
                 <li><a href="">Contact</a></li>
-                <li><a href="account.html">Account</a></li>
+                <li><a href="{{ route('account') }}">Account</a></li>
             </ul>
         </nav>
-        <a href="cart.html"><img src="images/cart.png" width="30px" height="30px"></a>
+        <a href="{{ route('cart') }}"><img src="images/cart.png" width="30px" height="30px"></a>
         <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
     </div>
 </div>
@@ -54,7 +54,7 @@
                         <input type="password" id="password1" name="password" placeholder="Enter Password">
                         <button type="submit" class="btn">Login</button>
                         <a href="#">Forget Password</a>
-                        <a href="{{ route('auth/google') }}">  Sign in with Google</a>
+                        <a href="{{ route('auth/google') }}" class="btn btn-google"> <i class="fab fa-google"></i>Sign in with Google</a>
 
                     </form>
 

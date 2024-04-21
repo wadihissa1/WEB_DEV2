@@ -15,13 +15,13 @@ use App\Http\Controllers\ProfileController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('account');
 });
 
 Route::get("index",'App\Http\Controllers\WebsiteController@getindex')->name('index');
 Route::get("account",'App\Http\Controllers\WebsiteController@getaccount')->name('account');
 Route::get("cart",'App\Http\Controllers\WebsiteController@getcart')->name('cart');
-Route::get("product",'App\Http\Controllers\WebsiteController@getproduct')->name('product');
+Route::get("product/{id}",'App\Http\Controllers\WebsiteController@getproduct')->name('product');
 Route::get("product_details",'App\Http\Controllers\WebsiteController@getproduct_details')->name('product_details');
 Route::post('/login', 'App\Http\Controllers\LoginController@login')->name('login');
 Route::post('/register', 'App\Http\Controllers\RegisterController@register');

@@ -449,6 +449,22 @@ form a{
     transition: transform 1s;
 }
 
+.btn-google {
+    background-color: #2984FE;
+    color: #ffffff;
+    border: none;
+}
+
+.btn-google:hover {
+    background-color: #004d84;
+}
+
+.btn-google i {
+    padding-right: 8px; /* Adjust as needed */
+}
+
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css");
+
 /* Media query for menu */
 @media only screen and (max-width: 800px){
 
@@ -498,4 +514,5 @@ form a{
     .cart-info p{
         display: none;
     }
+
 }
