@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Store;
+use App\Models\StoreRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Laravel\Socialite\Facades\Socialite;
@@ -16,27 +18,29 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
-        $user = User::where('email', $request->email)->first();
 
-        if ($user) {
-            if (password_verify($request->password, $user->password)) {
-                if ($user->verified) {
-                    // If the user is verified, log them in
-                    return redirect()->route('product' ,['id' => $user->id]);
-                } else {
-                    // If the user is not verified, redirect them back with an error message
-                    return redirect()->back()->withErrors(['login_failed' => 'Your account is not verified. Please verify your email before logging in.']);
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $user = Auth::user();
+
+            if ($user->verified) {
+                // Check if the user is a "seller"
+                if ($user->role === 'seller') {
+                    return redirect()->route('chooseaction',['id' => $user->id]);
                 }
+
+                // If not a "seller", redirect to the default page (product route in this case)
+                return redirect()->route('product', ['id' => $user->id]);
+            } else {
+                // If the user is not verified, redirect them back with an error message
+                Auth::logout();
+                return redirect()->back()->withErrors(['login_failed' => 'Your account is not verified. Please verify your email before logging in.']);
             }
         }
 
         // If the email or password is incorrect, redirect them back with an error message
         return redirect()->back()->withErrors(['login_failed' => 'Invalid email or password']);
     }
-
-
-
-
+    
     public function redirectToGoogle()
     {
         return Socialite::driver('google')->redirect();
@@ -59,7 +63,7 @@ class LoginController extends Controller
             // If the user already exists, log them in
             Log::info('Existing User Details:', $existingUser->toArray());
             Auth::login($existingUser);
-            return redirect()->route('product' ,['id' => $existingUser->id]);
+            return redirect()->route('product', ['id' => $existingUser->id]);
         } else {
             // If the user doesn't exist, create a new user account
             $newUser = new User();
@@ -75,7 +79,7 @@ class LoginController extends Controller
             // Log in the newly created user
             Auth::login($newUser);
 
-            return redirect()->route('product' ,['id' => $newUser->id]);
+            return redirect()->route('product', ['id' => $newUser->id]);
         }
     }
 }

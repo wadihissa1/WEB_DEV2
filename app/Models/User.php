@@ -11,6 +11,14 @@ class User extends Authenticatable{
         'password',
         'role',
     ];
+    public function store()
+    {
+        return $this->hasMany(Store::class);
+    }
+    public function storeRequests()
+    {
+        return $this->hasMany(StoreRequest::class);
+    }
 
     protected $hidden = [
         'password',

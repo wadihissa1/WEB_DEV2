@@ -3,6 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\VerificationController;
+use App\Http\Controllers\ChooseActionController;
+use App\Http\Controllers\StoreController;
+use App\Http\Controllers\AdminController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,5 +37,23 @@ Route::get('/profile/{userId}/edit', 'App\Http\Controllers\ProfileController@edi
 Route::put('/profile/{userId}/update', 'App\Http\Controllers\ProfileController@update')->name('profile.update');
 Route::get("profile",'App\Http\Controllers\WebsiteController@getprofile')->name('profile');
 Route::get('verify/email/{token}', 'App\Http\Controllers\VerificationController@verifyEmail')->name('email.verify');
+//Route::get('/chooseaction', [VerificationController::class, 'verifyEmail'])->name('chooseaction');
+Route::get('/chooseaction/{id}', [ChooseActionController::class, 'index'])->name('chooseaction');
 
+
+    Route::get('/createstore/{id}', [StoreController::class, 'create'])->name('createstore'); // Updated route name
+    Route::post('/store', [StoreController::class, 'store'])->name('stores.store');
+    Route::get('/viewstore/{store}', [StoreController::class, 'view'])->name('viewstore');
+    
+
+    // Route to view all stores for the current user
+     Route::get('/viewallstores', [StoreController::class, 'viewAllStores'])->name('viewallstores');
+
+    // Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    // Route::post('/admin/approve/{store}', [AdminController::class, 'approve'])->name('admin.approve');
+    // Route::post('/admin/reject/{store}', [AdminController::class, 'reject'])->name('admin.reject');
+      
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::post('/admin/approve/{storeRequest}', [AdminController::class, 'approveRequest'])->name('admin.approveRequest');
+    Route::post('/admin/reject/{storeRequest}', [AdminController::class, 'rejectRequest'])->name('admin.rejectRequest');
 

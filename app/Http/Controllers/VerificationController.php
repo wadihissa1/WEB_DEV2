@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Controllers\WebsiteController;
+
 use App\Models\User;
+use App\Models\Store;
+use App\Models\StoreRequest;
 use Illuminate\Http\Request;
 
 class VerificationController extends Controller
@@ -22,10 +24,12 @@ class VerificationController extends Controller
         $user->email_verification_token = null; // Optional: Clear the verification token
         $user->save();
 
-        // Optionally, you can log in the user after email verification
-        // Auth::login($user);
+        // Check if the user is a "seller"
+        if ($user->role === 'seller') {
+            return redirect()->route('chooseaction', ['id' => $user->id]);
+        }
 
         // Redirect the user to a page indicating successful verification
-        return redirect()->route('product' ,['id' => $user->id]);
+        return redirect()->route('product', ['id' => $user->id]);
     }
 }

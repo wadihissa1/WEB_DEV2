@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Store;
+use App\Models\StoreRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EmailVerification;
@@ -16,6 +18,7 @@ class RegisterController extends Controller
                 'name' => 'required',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required',
+                'role' => 'required|in:buyer,seller', // Add validation for role
             ]);
 
             // Create a new user instance
@@ -28,6 +31,12 @@ class RegisterController extends Controller
 
             // Send email verification
             $this->sendEmailVerification($user);
+
+            // If user is verified and role is "seller", redirect to chooseaction page
+            if ($user->verified && $user->role === 'seller') {
+                Auth::login($user);
+                return redirect()->route('chooseaction');
+            }
 
             return "Registration successful! Please check your email to verify your account.";
         } catch (\Exception $e) {
