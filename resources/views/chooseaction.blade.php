@@ -30,7 +30,7 @@ h1 {
     margin: 10px;
     text-decoration: none;
     color: white;
-    background-color: #ff523b;;
+    background-color: #004d84;
     border-radius: 5px;
     font-size: 18px;
 }
@@ -48,7 +48,7 @@ h1 {
     <a class="btn" href="{{ route('viewallstores', ['id' => $userId]) }}">View My Stores</a>
 
     <!-- Create Store Button -->
-  <a class="btn" href="{{ route('createstore',['id'=>$userId ]) }}">Create Store</a> 
+  <a class="btn" href="{{ route('createstore',['id'=>$userId ]) }}">Create Store</a>
 
 </body>
 </html>

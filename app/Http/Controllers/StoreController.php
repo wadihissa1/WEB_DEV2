@@ -36,7 +36,7 @@ class StoreController extends Controller
     public function viewAllStores()
     {
         $user = auth()->user();
-        
+
         // Get only the approved stores
         $userStores = Store::where('user_id', $user->id)
                             ->where('status', 'approved')
@@ -45,7 +45,7 @@ class StoreController extends Controller
         return view('viewallstore', [
             'userStores' => $userStores,
         ]);
-    
+
     }
-   
+
 }
