@@ -36,7 +36,7 @@ h1 {
 }
 
 .btn:hover {
-    background-color:  #ff523b;
+    background-color:  white;
 }
 
         </style>
