@@ -4,51 +4,71 @@
     <meta charset="UTF-8">
     <title>Choose Action</title>
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
-    <style>
+    
+        <style>
         body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f9f9f9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            background-color: #f5f5f5;
+        }
 
-.container {
-    text-align: center;
-}
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            height:250px;
+        }
 
-h1 {
-    color: #333;
-}
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ff523b;
+        }
 
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    margin: 10px;
-    text-decoration: none;
-    color: white;
-    background-color: #004d84;
-    border-radius: 5px;
-    font-size: 18px;
-}
+        
 
-.btn:hover {
-    background-color:  white;
-}
+        .btn {
+            background-color:  #ff523b;
+            color: white;
+            border: none;
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 80%;
+            text-align:center;
+            font-size:20px;
+        }
+        .btn:hover{
+            background-color: #d63a1e;
 
-        </style>
+        }
+
+        
+    </style>
+
 </head>
 <body>
+    <form>
     <h1>Choose Action</h1>
+    
+    @if (session('success'))
+        <div>
+            {{ session('success') }}
+        </div>
+    @endif
 
     <!-- View All Stores Button -->
     <a class="btn" href="{{ route('viewallstores', ['id' => $userId]) }}">View My Stores</a>
 
     <!-- Create Store Button -->
-  <a class="btn" href="{{ route('createstore',['id'=>$userId ]) }}">Create Store</a>
-
+  <a class="btn" href="{{ route('createstore',['id'=>$userId ]) }}">Create New Store</a>
+    </form>
 </body>
 </html>

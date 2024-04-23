@@ -35,7 +35,7 @@ class RegisterController extends Controller
             // If user is verified and role is "seller", redirect to chooseaction page
             if ($user->verified && $user->role === 'seller') {
                 Auth::login($user);
-                return redirect()->route('chooseaction',['id' => $user->id]);
+                return redirect()->route('chooseaction', ['id' => $user->id]);
             }
 
             return "Registration successful! Please check your email to verify your account.";

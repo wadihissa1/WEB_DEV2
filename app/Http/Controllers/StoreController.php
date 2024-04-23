@@ -15,6 +15,10 @@ class StoreController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
         $user = auth()->user();
 
         // Create a store request
@@ -24,7 +28,7 @@ class StoreController extends Controller
             'description' => $request->input('description'),
         ]);
 
-        return redirect()->route('chooseaction', ['id' => $user->id])->with('success', 'Store request submitted successfully!');
+        return redirect()->route('chooseaction', ['id' => $user->id]);
     }
 
     public function view($storeId)
