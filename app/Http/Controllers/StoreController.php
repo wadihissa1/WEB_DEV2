@@ -9,7 +9,7 @@ use App\Models\StoreRequest;
 class StoreController extends Controller
 {
 
-    
+
     public function create()
     {
         return view('createstore');
@@ -21,6 +21,7 @@ class StoreController extends Controller
             'name' => 'required',
             'description' => 'required',
         ]);
+
         $user = auth()->user();
 
         // Create a store request
@@ -33,7 +34,9 @@ class StoreController extends Controller
         return redirect()->route('chooseaction', ['id' => $user->id]);
     }
 
-    public function view($storeId)
+
+    //cant name view changed to show
+    public function show($storeId)
     {
         $store = Store::findOrFail($storeId);
         return view('viewstore', ['store' => $store]);
@@ -48,9 +51,15 @@ class StoreController extends Controller
                             ->where('status', 'approved')
                             ->get();
 
+        $userStore = Store::all();
+
+
         return view('viewallstore', [
             'userStores' => $userStores,
         ]);
+
+
+        
 
     }
 
