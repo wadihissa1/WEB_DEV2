@@ -8,6 +8,8 @@ use App\Models\Store;
 use App\Models\StoreRequest;
 class StoreController extends Controller
 {
+
+    
     public function create()
     {
         return view('createstore');

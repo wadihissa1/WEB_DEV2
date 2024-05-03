@@ -87,7 +87,11 @@
                         <td>{{ $store->id }}</td>
                         <td>{{ $store->name }}</td>
                         <td>{{ $store->description }}</td>
-                        <td><a class="btn" href="{{ route('viewstore', ['store' => $store->id]) }}">View</a></td>
+                        <td><a class="btn" href="{{ route('viewstore', ['store' => $store->id]) }}">View</a> </td>
+                        <td><a class="btn" href="{{ route('createproduct', ['storeId' => $store->id]) }}">Create Products</a>
+                    </td> 
+
+
                     </tr>
                 @endforeach
             </tbody>

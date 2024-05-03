@@ -64,11 +64,12 @@
         </div>
     @endif
 
-    <!-- View All Stores Button -->
-    <a class="btn" href="{{ route('viewallstores', ['id' => $userId]) }}">View My Stores</a>
+<!-- View All Stores Button -->
+   <a class="btn" href="{{ route('viewallstores', ['id' => $userId]) }}">View My Stores</a>
 
-    <!-- Create Store Button -->
-  <a class="btn" href="{{ route('createstore',['id'=>$userId ]) }}">Create New Store</a>
-    </form>
+<!-- Create Store Button -->
+<a class="btn" href="{{ route('createstore', ['id' => $userId]) }}">Create Store</a>
+
+</form>
 </body>
 </html>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\StoreRequest;
 use App\Models\Store;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -12,7 +13,8 @@ class AdminController extends Controller
     public function index()
     {
         $pendingRequests = StoreRequest::where('status', 'pending')->get();
-        return view('admindashboard', ['pendingRequests' => $pendingRequests]);
+        $categories = Category::all();
+        return view('admindashboard', ['pendingRequests' => $pendingRequests, 'categories' => $categories]);
     }
 
     public function approveRequest(StoreRequest $storeRequest)
@@ -37,5 +39,10 @@ class AdminController extends Controller
         $storeRequest->save();
 
         return redirect()->back()->with('success', 'Store request rejected.');
+    }
+    public function viewCategories()
+    {
+        $categories = Category::all();
+        return view('viewcategories', ['categories' => $categories]);
     }
 }
