@@ -14,7 +14,7 @@
         <div class="container">
             <div class="navbar">
                 <div class="logo">
-                    <a href="{{ route('index') }}"><img src="images/logo.png" alt="logo" width="125px"></a>
+                        <a href="{{ route('index') }}"><img src="{{ asset('images/logo.png') }}" alt="logo" width="125px"></a>
                 </div>
                 <nav>
                     <ul id="MenuItems">
@@ -25,7 +25,7 @@
                         <li><a href="{{ route('account') }}">Account</a></li>
                     </ul>
                 </nav>
-                <a href="{{ route('cart') }}"><img src="images/cart.png" width="30px" height="30px"></a>
+                <a href="{{ route('cart') }}"><img src="{{ asset('images/cart.png') }}" width="30px" height="30px"></a>
                 <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
             </div>
            
@@ -39,16 +39,8 @@
     <div class="footer">
         <div class="container">
             <div class="row">
-                <div class="footer-col-1">
-                    <h3>Download Our App</h3>
-                    <p>Download App for Android and ios mobile phone.</p>
-                    <div class="app-logo">
-                        <img src="images/play-store.png">
-                        <img src="images/app-store.png">
-                    </div>
-                </div>
                 <div class="footer-col-2">
-                    <img src="images/logo-white.png">
+                    <img src="{{ asset('images/logo-white.png') }}">
                     <p>Our Purpose Is To Sustainably Make the Pleasure and Benefits of Sports Accessible to the Many.
                     </p>
                 </div>

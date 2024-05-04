@@ -35,31 +35,32 @@ class StoreController extends Controller
 
 
     //cant name view changed to show
-    public function show($storeId)
-    {
-        $store = Store::findOrFail($storeId);
-        return view('viewstore', ['store' => $store]);
-    }
-
+    
     public function viewAllStores()
     {
         $user = auth()->user();
-
+        
         // Get only the approved stores
         $userStores = Store::where('user_id', $user->id)
-                            ->where('status', 'approved')
-                            ->get();
-
+        ->where('status', 'approved')
+        ->get();
+        
         $userStore = Store::all();
 
 
         return view('viewallstore', [
             'userStores' => $userStores,
         ]);
-
-
         
-
     }
 
+    
+    public function show($storeId)
+{
+    $store = Store::findOrFail($storeId);
+    $products = $store->products()->paginate(6);
+
+    return view('viewstore', ['store' => $store, 'products' => $products]);
+}
+    
 }

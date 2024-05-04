@@ -70,7 +70,7 @@
     <a class="btn" href="">View My Stores</a>
 
     <!-- Create Store Button -->
-  <a class="btn" href="">Create New Store</a>
+    <a class="btn" href="">Create New Store</a>
     </form>
 </body>
 </html>
