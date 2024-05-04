@@ -58,22 +58,22 @@
 </head>
 <body>
     <form>
-    <h1>Choose Action</h1>
-   
-    @if (session('success'))
-        <div>
-            {{ session('success') }}
-        </div>
-    @endif
- 
-<!-- View All Stores Button -->
-   <a class="btn" href="{{ route('viewallstores', ['id' => $userId]) }}">View My Stores</a>
- 
-<!-- Create Store Button -->
-<a class="btn" href="{{ route('createstore', ['id' => $userId]) }}">Create Store</a>
- 
-</form>
- 
+        <h1>Choose Action</h1>
+        
+        @if (session('success'))
+            <div>
+                {{ session('success') }}
+            </div>
+        @endif
+    
+    <!-- View All Stores Button -->
+       <a class="btn" href="{{ route('viewallstores', ['id' => $userId]) }}">View My Stores</a>
+    
+    <!-- Create Store Button -->
+    <a class="btn" href="{{ route('createstore', ['id' => $userId]) }}">Create Store</a>
+    
+    </form>
+    
 </body>
 </html>
 @endsection

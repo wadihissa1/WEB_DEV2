@@ -9,7 +9,7 @@
             margin: 20px;
             background-color: #f8f9fa;
         }
- 
+
         /* Navbar styles */
         .navbar {
             position: fixed;
@@ -21,7 +21,7 @@
             padding: 20px;
             color: #fff;
         }
- 
+
         .navbar a {
             display: block;
             margin-bottom: 10px;
@@ -30,31 +30,31 @@
             font-size: 18px;
             cursor: pointer;
         }
- 
+
         /* Content styles */
         .content {
             margin-left: 220px; /* Adjust margin to account for navbar width */
             padding: 20px;
         }
- 
+
         /* Hide by default */
         .hidden {
             display: none;
         }
- 
+
         /* Table styles */
         table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
         }
- 
+
         th, td {
             padding: 10px;
             text-align: left;
             border-bottom: 1px solid #ccc;
         }
- 
+
         th {
             background-color: #f2f2f2;
         }
@@ -67,7 +67,7 @@
         <a href="#" onclick="showCreateCategories()">Create Categories</a>
         <a href="#" onclick="showViewCategories()">View Categories</a>
     </div>
- 
+
     <!-- Content -->
     <div class="content" id="pendingRequests">
         @if($pendingRequests->count() > 0)
@@ -104,7 +104,7 @@
             <p>No pending store requests.</p>
         @endif
     </div>
- 
+
     <div class="content hidden" id="createCategories">
         <h1>Create categories</h1>
     <a href="{{ route('createcategory') }}" class="btn">Create CAtegorie</a>        <!-- Your create categories HTML content goes here -->
@@ -131,9 +131,9 @@
 @else
     <p>No categories found.</p>
 @endif
- 
+
 </div>
- 
+
 <script>
     // Function to show pending requests
     function showPendingRequests() {
@@ -141,14 +141,14 @@
         document.getElementById('createCategories').classList.add('hidden');
         document.getElementById('viewCategories').classList.add('hidden');
     }
- 
+
     // Function to show create categories
     function showCreateCategories() {
         document.getElementById('createCategories').classList.remove('hidden');
         document.getElementById('pendingRequests').classList.add('hidden');
         document.getElementById('viewCategories').classList.add('hidden');
     }
- 
+
     // Function to show view categories
     function showViewCategories() {
         document.getElementById('viewCategories').classList.remove('hidden');
@@ -156,7 +156,7 @@
         document.getElementById('pendingRequests').classList.add('hidden');
     }
 </script>
- 
+
 </body>
 </html>
  
