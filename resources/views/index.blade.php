@@ -13,7 +13,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
           rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{asset('main.css')}}">
 </head>
 
 
@@ -42,7 +41,7 @@
             @foreach ($userStore as $store)
 
             <div class="col-4">
-                <a href="product_details.html"><img src="images/product-1.jpg"></a>
+                <a href="/viewstore/{{ $store->id }}"><img src="images/product-1.jpg"></a>
                 <center><h3>{{ $store->name }}</h3></center>
             </div>
                 
