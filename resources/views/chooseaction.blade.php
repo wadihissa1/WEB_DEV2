@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <title>Choose Action</title>
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
-    
    
         <style>
         body {
@@ -69,7 +68,6 @@
 </head>
 <body>
     <form>
-    <h1>Choose Action</h1>
         <h1>Choose Action</h1>
         
         @if (session('success'))
