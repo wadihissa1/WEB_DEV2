@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title>Choose Action</title>
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
-   
+
         <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,7 +16,7 @@
             background-position: center;
             backdrop-filter: blur(10px);
         }
- 
+
         form {
             background-color: #ffffff;
             padding: 20px;
@@ -37,15 +37,15 @@
         form:hover body{
             filter: blur(10px);
         }
- 
+
         h1 {
             text-align: center;
             margin-bottom: 20px;
             color: #ff523b;
         }
- 
-       
- 
+
+
+
         .btn {
             background-color:  #ff523b;
             color: white;
@@ -59,31 +59,32 @@
         }
         .btn:hover{
             background-color: #d63a1e;
- 
+
         }
- 
-       
+
+
     </style>
- 
+
 </head>
 <body>
     <form>
         <h1>Choose Action</h1>
-        
+
         @if (session('success'))
             <div>
                 {{ session('success') }}
             </div>
         @endif
-    
+
     <!-- View All Stores Button -->
-       <a class="btn" href="{{ route('viewallstores', ['id' => $userId]) }}">View My Stores</a>
-    
+     <a class="btn" href="{{ route('viewallstores', ['id' => $userId]) }}">View My Stores</a>
+
     <!-- Create Store Button -->
     <a class="btn" href="{{ route('createstore', ['id' => $userId]) }}">Create Store</a>
-    
+
+        <a class="btn" href="{{ route('events.create', ['id' => $userId]) }}">Create Event</a>
     </form>
-    
+
 </body>
 </html>
 @endsection

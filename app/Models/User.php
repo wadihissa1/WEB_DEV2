@@ -41,4 +41,7 @@ class User extends Authenticatable{
     protected $hidden = [
         'password',
     ];
+    public function bids(){
+   return $this->hasMany(Bid::class);
+    }
 }
