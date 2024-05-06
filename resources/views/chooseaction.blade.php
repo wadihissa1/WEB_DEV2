@@ -1,3 +1,5 @@
+@extends('layout')
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,5 +73,14 @@
 <a class="btn" href="{{ route('createstore', ['id' => $userId]) }}">Create Store</a>
 
 </form>
+
+    <!-- View All Stores Button -->
+    <a class="btn" href="">View My Stores</a>
+
+    <!-- Create Store Button -->
+  <a class="btn" href="">Create New Store</a>
+    </form>
+
 </body>
 </html>
+@endsection

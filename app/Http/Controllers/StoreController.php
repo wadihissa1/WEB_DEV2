@@ -23,7 +23,9 @@ class StoreController extends Controller
             'name' => 'required',
             'description' => 'required',
         ]);
-        $user = Auth::user();
+
+        $user = auth()->user();
+
 
         // Create a store request
         $storeRequest = StoreRequest::create([
@@ -35,7 +37,9 @@ class StoreController extends Controller
         return redirect()->route('chooseaction', ['id' => $user->id]);
     }
 
-    public function view($storeId)
+
+    //cant name view changed to show
+    public function show($storeId)
     {
         $store = Store::findOrFail($storeId);
         return view('viewstore', ['store' => $store]);
@@ -50,9 +54,15 @@ class StoreController extends Controller
                             ->where('status', 'approved')
                             ->get();
 
+        $userStore = Store::all();
+
+
         return view('viewallstore', [
             'userStores' => $userStores,
         ]);
+
+
+        
 
     }
 
