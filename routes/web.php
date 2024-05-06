@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WebsiteController;
+use App\Http\Controllers\ReviewController;
 
 
 /*
@@ -85,9 +86,35 @@ Route::post('/store', [StoreController::class, 'store'])->name('stores.store');
 
     // Route to view all stores for the current user
   Route::get('/viewallstores/{id}', [StoreController::class, 'viewAllStores'])->name('viewallstores');
+  Route::get('/editstore/{storeId}', [StoreController::class, 'edit'])->name('editstore');
+Route::put('/updatestore/{storeId}', [StoreController::class, 'update'])->name('updatestore');
+Route::delete('/deletestore/{storeId}', [StoreController::class, 'destroy'])->name('deletestore');
+
   Route::get('/createproduct/{storeId}', [ProductController::class, 'create'])->name('createproduct');
   Route::post('/storeproduct', [ProductController::class, 'store'])->name('storeproduct');
-    // Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+  
+  Route::get('/viewproducts/{storeId}', [ProductController::class, 'viewProducts'])->name('viewproducts');
+  Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+  Route::post('/submitreview', [ReviewController::class, 'submitReview'])->name('submitreview');
+  Route::get('/view-pending-requests', [StoreController::class, 'viewPendingRequests'])->name('viewpendingrequests');
+
+  //Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+  Route::get('/products/{id}/edit',[ProductController::class,'edit'])->name('products.edit');
+ //Route::put('/products/{id}', [ProductController::class, "update"])->name('products.update');
+
+ // Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
+  Route::get('/stores/{storeId}', [StoreController::class, 'show'])->name('stores.show');
+ 
+  Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+
+ // Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
+  Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+  //Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
+  
+
+ // Route::post('/submitreview', [ReviewController::class, 'submitReview'])->name('submitreview');
+  
+  // Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     // Route::post('/admin/approve/{store}', [AdminController::class, 'approve'])->name('admin.approve');
     // Route::post('/admin/reject/{store}', [AdminController::class, 'reject'])->name('admin.reject');
       

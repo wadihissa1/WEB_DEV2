@@ -42,6 +42,7 @@
             color: #fff;
             text-decoration: none;
             border-radius: 4px;
+            border-color:  #ff523b;
         }
         .btn1 {
             display: center;
@@ -70,7 +71,7 @@
 
     <!-- Your Stores Section -->
     <h2>Your Stores:</h2>
-
+    <a class="btn" href="{{ route('viewpendingrequests') }}">View Pending Requests</a>
     @if($userStores && $userStores->count() > 0)
         <table>
             <thead>
@@ -79,6 +80,8 @@
                     <th>Store Name</th>
                     <th>Description</th>
                     <th>View Store Details</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -87,9 +90,20 @@
                         <td>{{ $store->id }}</td>
                         <td>{{ $store->name }}</td>
                         <td>{{ $store->description }}</td>
-                        <td><a class="btn" href="{{ route('viewstore', ['store' => $store->id]) }}">View</a> </td>
-                        <td><a class="btn" href="{{ route('createproduct', ['storeId' => $store->id]) }}">Create Products</a>
+                        <td><!--<a class="btn" href="{{ route('viewstore', ['store' => $store->id]) }}">View</a> -->
+                        <a class="btn" href="{{ route('createproduct', ['storeId' => $store->id]) }}">Create Products</a>
+                        <a class="btn" href="{{ route('viewproducts', ['storeId' => $store->id]) }}">View Products</a>
                     </td> 
+                    <td>
+    <a class="btn" href="{{ route('editstore', ['storeId' => $store->id]) }}">Edit</a>
+</td>
+<td>
+    <form action="{{ route('deletestore', ['storeId' => $store->id]) }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn" onclick="return confirm('Are you sure you want to delete this store?')">Delete</button>
+    </form>
+</td>
 
 
                     </tr>

@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Store;
 use App\Models\StoreRequest;
+use App\Models\Product;
+use App\Models\Category;
 class StoreController extends Controller
 {
 
@@ -55,7 +57,18 @@ class StoreController extends Controller
         
     }
 
+    public function viewPendingRequests()
+{
+    $user = auth()->user();
     
+    // Get stores with pending status
+    $pendingRequests = StoreRequest::where('user_id', $user->id)
+        ->where('status', 'pending')
+        ->get();
+
+    return view('viewpendingrequests', ['pendingRequests' => $pendingRequests]);
+}
+
     public function show($storeId)
 {
     $store = Store::findOrFail($storeId);
@@ -63,5 +76,32 @@ class StoreController extends Controller
 
     return view('viewstore', ['store' => $store, 'products' => $products]);
 }
-    
+public function edit($storeId)
+{
+    $store = Store::findOrFail($storeId);
+    return view('editstore', ['store' => $store]);
+}
+
+public function update(Request $request, $storeId)
+{
+    $request->validate([
+        'name' => 'required',
+        'description' => 'required',
+    ]);
+
+    $store = Store::findOrFail($storeId);
+    $store->name = $request->name;
+    $store->description = $request->description;
+    $store->save();
+
+    return redirect()->route('viewallstores')->with('success', 'Store updated successfully.');
+}
+
+public function destroy($storeId)
+{
+    $store = Store::findOrFail($storeId);
+    $store->delete();
+
+    return redirect()->route('viewallstores')->with('success', 'Store deleted successfully.');
+}
 }

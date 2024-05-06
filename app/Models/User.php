@@ -19,6 +19,10 @@ class User extends Authenticatable{
     {
         return $this->hasMany(StoreRequest::class);
     }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 
     protected $hidden = [
         'password',

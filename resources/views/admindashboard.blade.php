@@ -74,6 +74,7 @@
             <table>
                 <thead>
                     <tr>
+                        <th>Username</th>
                         <th>Name</th>
                         <th>Description</th>
                         <th>Status</th>
@@ -83,6 +84,7 @@
                 <tbody>
                     @foreach($pendingRequests as $request)
                         <tr>
+                        <td>{{ $request->user->name }}</td>
                             <td>{{ $request->name }}</td>
                             <td>{{ $request->description }}</td>
                             <td>{{ $request->status }}</td>
