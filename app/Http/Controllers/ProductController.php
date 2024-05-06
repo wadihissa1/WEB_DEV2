@@ -1,7 +1,8 @@
 <?php
  
 namespace App\Http\Controllers;
- 
+
+
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
@@ -46,7 +47,7 @@ class ProductController extends Controller
     }
  
     //show all products
-    public function StoresDetails(){
+        public function StoresDetails(){
         $store = auth()->user();
         $storeProducts = Product::where('store_id', $store->id)->latest()->paginate(6);
    
