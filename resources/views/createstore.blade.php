@@ -11,28 +11,21 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
             background-color: #f5f5f5;
-            /* Background image for the body */
-            background-image: url("images\createstore-background.webp"); /* Assuming this is in the same folder as your HTML file */
+            background-image: url("/images/createstore-background.webp");
             background-size: cover;
             background-position: center;
+            backdrop-filter: blur(10px);
         }
 
         .form-container {
-            background-color: rgba(255, 255, 255, 0.8); /* Translucent white background */
+            background: radial-gradient(#fff, #ffd6d6);
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
             width: 400px;
-            /* Background image for the form container */
-            background-image: url("images\createstore-background.webp"); /* Assuming this is in the same folder as your HTML file */
-            background-size: cover;
-            background-position: center;
+            border: 2px solid #2b282825;
         }
 
         form {
@@ -41,6 +34,7 @@
             border-radius: 8px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
             width: 400px;
+            margin: 90px auto;
         }
 
         h1 {
@@ -68,7 +62,7 @@
 
         button {
             background-color:  #ff523b;
-            color: white;
+            color: #fff;
             border: none;
             padding: 10px 20px;
             border-radius: 4px;
@@ -77,10 +71,9 @@
         }
 
         button:hover {
-            background-color: #d63a1e;
-            color: white;
-            border-radius:20px;
-            
+            background-color: #fff;
+            color: #d63a1e;
+            border: 1px solid #d63a1e;
         }
     </style>
 </head>

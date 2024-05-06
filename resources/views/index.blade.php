@@ -13,7 +13,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
           rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{asset('main.css')}}">
 </head>
 
 
@@ -36,13 +35,14 @@
 <!-- Feadtued stores  -->
 
 <div class="categories">
+    <h2 class="title">Featured Stores</h2>
     <div class="small-container">
         <div class="row">
 
             @foreach ($userStore as $store)
 
             <div class="col-4">
-                <a href="product_details.html"><img src="images/product-1.jpg"></a>
+                <a href="/viewstore/{{ $store->id }}"><img src="images/product-1.jpg"></a>
                 <center><h3>{{ $store->name }}</h3></center>
             </div>
                 
@@ -56,7 +56,7 @@
 
 <!-- Featured Products -->
 
-<div class="small-container">
+<div>
     <h2 class="title">Featured Products</h2>
     
     <div class="row">
@@ -78,7 +78,7 @@
 
 <!-- Offer -->
 <div class="offer">
-    <div class="small-container">
+    <div>
         <div class="row">
             <div class="col-2">
                 <img src="images/exclusive.png" class="offer-img">
@@ -167,7 +167,8 @@
         </div>
     </div>
 </div>
-
+    </div>
+</div>
 
 
 
