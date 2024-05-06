@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Store;
 use App\Models\StoreRequest;
+use Illuminate\Support\Facades\Auth;
+
 class StoreController extends Controller
 {
 
-    
+
     public function create()
     {
         return view('createstore');
@@ -21,7 +23,7 @@ class StoreController extends Controller
             'name' => 'required',
             'description' => 'required',
         ]);
-        $user = auth()->user();
+        $user = Auth::user();
 
         // Create a store request
         $storeRequest = StoreRequest::create([
@@ -41,7 +43,7 @@ class StoreController extends Controller
 
     public function viewAllStores()
     {
-        $user = auth()->user();
+        $user = Auth::user();
 
         // Get only the approved stores
         $userStores = Store::where('user_id', $user->id)

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Choose Action</title>
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
-    
+
         <style>
         body {
             font-family: Arial, sans-serif;
@@ -32,7 +32,7 @@
             color: #ff523b;
         }
 
-        
+
 
         .btn {
             background-color:  #ff523b;
@@ -50,14 +50,14 @@
 
         }
 
-        
+
     </style>
 
 </head>
 <body>
     <form>
     <h1>Choose Action</h1>
-    
+
     @if (session('success'))
         <div>
             {{ session('success') }}
