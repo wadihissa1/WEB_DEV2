@@ -25,13 +25,13 @@
             font-family: Arial, sans-serif;
             text-align: center;
         }
- 
+
         table {
             width: 80%;
             border-collapse: collapse;
             margin-top: 20px;
         }
- 
+
         th, td {
             border: 1px solid  #ff523b;
             padding: 8px;
@@ -46,7 +46,7 @@
             background-color:  #ff523b;
             color: white;
         }
- 
+
         .btn {
             display: inline-block;
             padding: 8px 12px;
@@ -56,6 +56,7 @@
             text-decoration: none;
             width: max-content;
             border-radius: 4px;
+            border-color:  #ff523b;
         }
         .btn1 {
             padding: 8px 12px;
@@ -71,9 +72,9 @@
         color: #ff523b;
         border: 4px solid #ff523b;
         }
- 
-       
- 
+
+        
+
         .no-stores {
             text-align: center;
             color: #ff523b ;
@@ -89,13 +90,13 @@
     </style>
 </head>
 <body>
-    <div class="content">
-    <h1>{{auth()->user()->name}} Stores:</h1>
-    <br>
-    <br>
-    <br>
-    <br>
- 
+<div class="content">
+<h1>{{auth()->user()->name}} Stores:</h1>
+
+    <!-- Your Stores Section -->
+    <h2>Your Stores:</h2>
+   <a class="btn" href="{{ route('viewpendingrequests') }}">View Pending Requests</a>
+
     @if($userStores && $userStores->count() > 0)
         <table>
             <thead>
@@ -103,7 +104,9 @@
                     <th>Store ID</th>
                     <th>Store Name</th>
                     <th>Description</th>
-                    <th>Options</th>
+                    <th>View Store Details</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -112,11 +115,22 @@
                         <td>{{ $store->id }}</td>
                         <td>{{ $store->name }}</td>
                         <td>{{ $store->description }}</td>
-                        <td><a class="btn" href="{{ route('viewstore', ['store' => $store->id]) }}">View</a> </td>
-                        <td><a class="btn" href="{{ route('createproduct', ['storeId' => $store->id]) }}">Create Products</a>
-                    </td>
- 
- 
+                        <td><!--<a class="btn" href="{{ route('viewstore', ['store' => $store->id]) }}">View</a> -->
+                        <a class="btn" href="{{ route('createproduct', ['storeId' => $store->id]) }}">Create Products</a>
+                        <a class="btn" href="{{ route('viewproducts', ['storeId' => $store->id]) }}">View Products</a>
+                    </td> 
+                    <td>
+    <a class="btn" href="{{ route('editstore', ['storeId' => $store->id]) }}">Edit</a>
+</td>
+<td>
+    <form action="{{ route('deletestore', ['storeId' => $store->id]) }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn" onclick="return confirm('Are you sure you want to delete this store?')">Delete</button>
+    </form>
+</td>
+
+
                     </tr>
                 @endforeach
             </tbody>
@@ -129,4 +143,3 @@
 </body>
 </html>
 @endsection
- 

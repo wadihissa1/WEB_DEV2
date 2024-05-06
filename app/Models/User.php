@@ -21,6 +21,10 @@ class User extends Authenticatable{
     {
         return $this->hasMany(StoreRequest::class);
     }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 
     public function followings(){
         return $this->belongsToMany(User::class,'store_user','store_id','user_id')->withTimestamps();
