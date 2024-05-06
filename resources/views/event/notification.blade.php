@@ -8,8 +8,8 @@
 <body>
 <h2>New Event Created</h2>
 
-<p>A new event has been created:</p>
-
+<p>A new event has been created by:</p>
+<p><strong>Store Name:</strong> {{ $event->store->name }}</p>
 <p><strong>Name:</strong> {{ $event->name }}</p>
 <p><strong>Description:</strong> {{ $event->description }}</p>
 <p><strong>Date/Time:</strong> {{ $event->date_time }}</p>

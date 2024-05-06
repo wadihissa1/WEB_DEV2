@@ -1,13 +1,13 @@
 @extends('layout')
 @section('content')
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Choose Action</title>
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
 
-        <style>
+    <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -67,23 +67,23 @@
 
 </head>
 <body>
-    <form>
-        <h1>Choose Action</h1>
+<form>
+    <h1>Choose Action</h1>
 
-        @if (session('success'))
-            <div>
-                {{ session('success') }}
-            </div>
-        @endif
+    @if (session('success'))
+        <div>
+            {{ session('success') }}
+        </div>
+    @endif
 
     <!-- View All Stores Button -->
-     <a class="btn" href="{{ route('viewallstores', ['id' => $userId]) }}">View My Stores</a>
+    <a class="btn" href="{{ route('viewallstores', ['id' => $userId]) }}">View My Stores</a>
 
     <!-- Create Store Button -->
     <a class="btn" href="{{ route('createstore', ['id' => $userId]) }}">Create Store</a>
 
-        <a class="btn" href="{{ route('events.create', ['id' => $userId]) }}">Create Event</a>
-    </form>
+    <a class="btn" href="{{ route('events.create', ['id' => $userId]) }}">Create Event</a>
+</form>
 
 </body>
 </html>

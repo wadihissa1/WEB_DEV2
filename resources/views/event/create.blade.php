@@ -13,5 +13,12 @@
     <label for="time">Time:</label>
     <input type="time" name="time" id="time" required>
 
+    <label for="store_id">Select Store:</label>
+    <select name="store" id="store">
+        @foreach($userStores as $store) <!-- Iterate over $userStores -->
+        <option value="{{ $store->id }}">{{ $store->name }}</option>
+        @endforeach
+    </select>
+
     <button type="submit">Create Event</button>
 </form>
