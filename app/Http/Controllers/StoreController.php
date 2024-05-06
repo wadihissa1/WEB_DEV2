@@ -57,11 +57,17 @@ class StoreController extends Controller
 
     
     public function show($storeId)
-{
-    $store = Store::findOrFail($storeId);
-    $products = $store->products()->paginate(6);
-
-    return view('viewstore', ['store' => $store, 'products' => $products]);
-}
+    {
+        $store = Store::findOrFail($storeId);
+        $user = $store->user; // Assuming 'user' is the relationship between Store and User
+    
+        $products = $store->products()->simplePaginate(3);
+    
+        return view('viewstore', [
+            'store' => $store, 
+            'user' => $user, // Pass the $user variable to the view
+            'products' => $products
+        ]);
+    }
     
 }

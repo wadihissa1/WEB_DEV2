@@ -77,7 +77,7 @@
         @endif
     
     <!-- View All Stores Button -->
-       <a class="btn" href="{{ route('viewallstores', ['id' => $userId]) }}">View My Stores</a>
+    <a class="btn" href="{{ route('viewallstores', ['id' => $userId]) }}">View My Stores</a>
     
     <!-- Create Store Button -->
     <a class="btn" href="{{ route('createstore', ['id' => $userId]) }}">Create Store</a>

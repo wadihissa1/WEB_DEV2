@@ -26,7 +26,8 @@
         justify-content: end;
         margin-right: 20px;
     }
-    .container_head{
+
+    .container_head {
         background-color: #00000090;
         padding: 45px;
     }
@@ -37,9 +38,22 @@
         <img src="{{ asset('images/user-2.png') }}" alt="">
         <h1>{{ $store->name }}</h1>
         <p>Description: {{ $store->description }}</p>
+
+        @if (Auth::id() !== $user->id)
         <div class="follow">
-            <a href="" class="button">Follow</i></a>
+            {{-- @if (Auth::User()->follows($store)) --}}
+            {{-- <form method="POST" action="{{ route('users.unfollow', $store->id) }}">
+                @csrf
+                <button type="submit" class="button" style="background-color: red">Unfollow</button>
+            </form>
+            @else --}}
+            <form method="POST" action="{{ route('users.follow', $store->id) }}">
+                @csrf
+                <button type="submit" class="button">Follow</button>
+            </form>
+            {{-- @endif --}}
         </div>
+        @endif
     </div>
 
     <div class="categories">
