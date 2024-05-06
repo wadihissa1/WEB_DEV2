@@ -11,10 +11,12 @@ class User extends Authenticatable{
         'password',
         'role',
     ];
+
     public function store()
     {
         return $this->hasMany(Store::class);
     }
+
     public function storeRequests()
     {
         return $this->hasMany(StoreRequest::class);
@@ -22,6 +24,18 @@ class User extends Authenticatable{
     public function reviews()
     {
         return $this->hasMany(Review::class);
+    }
+
+    public function followings(){
+        return $this->belongsToMany(User::class,'store_user','store_id','user_id')->withTimestamps();
+    }
+
+    public function followers(){
+        return $this->belongsToMany(User::class,'store_user','user_id','store_id')->withTimestamps();
+    }
+
+    public function follows(User $user){
+        return $this->followings()->where('user_id', $user->id)->exists();
     }
 
     protected $hidden = [

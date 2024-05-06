@@ -11,12 +11,10 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 80vh;
-            background-color: #f5f5f5;
+            background-image: url("/images/createstore-background.webp");
+            background-size: cover;
+            background-position: center;
+            backdrop-filter: blur(10px);
         }
  
         form {
@@ -26,6 +24,18 @@
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
             width: 400px;
             height:250px;
+            margin: 90px auto;
+            border: 2px solid #2b282825;
+            background: radial-gradient(#fff, #ffd6d6);
+            filter: blur(5px);
+            transition: .5s ease-in-out;
+        }
+        form:hover{
+            filter: blur(0px);
+        }
+
+        form:hover body{
+            filter: blur(10px);
         }
  
         h1 {

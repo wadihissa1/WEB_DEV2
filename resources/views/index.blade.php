@@ -35,6 +35,7 @@
 <!-- Feadtued stores  -->
 
 <div class="categories">
+    <h2 class="title">Featured Stores</h2>
     <div class="small-container">
         <div class="row">
 
@@ -55,7 +56,7 @@
 
 <!-- Featured Products -->
 
-<div class="small-container">
+<div>
     <h2 class="title">Featured Products</h2>
     
     <div class="row">
@@ -77,7 +78,7 @@
 
 <!-- Offer -->
 <div class="offer">
-    <div class="small-container">
+    <div>
         <div class="row">
             <div class="col-2">
                 <img src="images/exclusive.png" class="offer-img">
@@ -166,7 +167,8 @@
         </div>
     </div>
 </div>
-
+    </div>
+</div>
 
 
 
