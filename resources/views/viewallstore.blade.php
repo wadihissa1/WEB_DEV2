@@ -100,17 +100,12 @@
     </style>
 </head>
 <body>
-<div class="content">
-<h1>{{auth()->user()->name}} Stores:</h1>
-
-    <!-- Your Stores Section -->
-   <a class="btn" href="{{ route('viewpendingrequests') }}">View Pending Requests</a>
 
 <div class="content">
 <h1>{{auth()->user()->name}} Stores:</h1>
-
-    <!-- Your Stores Section -->
-    <h2>Your Stores:</h2>
+<br>
+<br>
+<br>
    <a class="btn" href="{{ route('viewpendingrequests') }}">View Pending Requests</a>
 
     @if($userStores && $userStores->count() > 0)
@@ -120,9 +115,6 @@
                     <th>Store ID</th>
                     <th>Store Name</th>
                     <th>Description</th>
-                    <th>View Store Details</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
                     <th>View Store Details</th>
                     <th>Edit</th>
                     <th>Delete</th>
@@ -148,25 +140,6 @@
         <button type="submit" class="btn" onclick="return confirm('Are you sure you want to delete this store?')">Delete</button>
     </form>
 </td>
-
-
-                        <td>{{ $store->description }}</td>
-                        <td><!--<a class="btn" href="{{ route('viewstore', ['store' => $store->id]) }}">View</a> -->
-                        <a class="btn" href="{{ route('createproduct', ['storeId' => $store->id]) }}">Create Products</a>
-                        <a class="btn" href="{{ route('viewproducts', ['storeId' => $store->id]) }}">View Products</a>
-                    </td> 
-                    <td>
-    <a class="btn" href="{{ route('editstore', ['storeId' => $store->id]) }}">Edit</a>
-</td>
-<td>
-    <form action="{{ route('deletestore', ['storeId' => $store->id]) }}" method="POST">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn" onclick="return confirm('Are you sure you want to delete this store?')">Delete</button>
-    </form>
-</td>
-
-
                     </tr>
                 @endforeach
             </tbody>
