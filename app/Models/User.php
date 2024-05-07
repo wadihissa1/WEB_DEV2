@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Store;
+use App\Models\StoreRequest;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable{
     protected $fillable = [
@@ -11,6 +14,11 @@ class User extends Authenticatable{
         'password',
         'role',
     ];
+
+    public function following(): BelongsToMany
+{
+    return $this->belongsToMany(Store::class, 'store_user', 'user_id', 'store_id');
+}
 
     public function store()
     {
@@ -30,9 +38,11 @@ class User extends Authenticatable{
         return $this->belongsToMany(User::class,'store_user','user_id','store_id')->withTimestamps();
     }
 
-    public function follows(User $user){
-        return $this->followings()->where('user_id', $user->id)->exists();
-    }
+    public function follows(Store $store)
+{
+    // Check if the user is following the provided store
+    return $this->following()->where('store_id', $store->id)->exists();
+}
 
     protected $hidden = [
         'password',

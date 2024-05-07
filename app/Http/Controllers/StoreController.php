@@ -56,7 +56,7 @@ class StoreController extends Controller
     }
 
     
-    public function show($storeId)
+    public function showstore($storeId)
     {
         $store = Store::findOrFail($storeId);
         $user = $store->user; // Assuming 'user' is the relationship between Store and User
