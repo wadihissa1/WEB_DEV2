@@ -24,6 +24,10 @@ class Store extends Model
 {
     return $this->belongsToMany(User::class, 'store_user', 'store_id', 'user_id');
 }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
     
 
 }
