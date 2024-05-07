@@ -20,5 +20,10 @@ class Event extends Model
     {
         return $this->belongsTo(Store::class);
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
 

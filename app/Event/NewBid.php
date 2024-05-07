@@ -23,6 +23,7 @@ class NewBid implements ShouldBroadcast
     public function __construct(Bid $bid)
     {
         $this->bid = $bid;
+        \Log::info("Bid is: $bid");
     }
 
     /**
@@ -34,6 +35,8 @@ class NewBid implements ShouldBroadcast
     {
         \Log::info('NewBid event is being broadcasted.');
         $event_id = $this->bid->event_id;
+        $channelName = 'event-' . $event_id;
+        \Log::info("Broadcasting NewBid event on channel: $channelName");
         return new Channel('event-'.$event_id);
     }
 

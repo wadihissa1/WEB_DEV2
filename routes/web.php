@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BidController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProfileController;
@@ -196,3 +197,11 @@ Route::post('/bids/store', 'BidController@store')->name('bids.store');
 Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
 
 Route::post('/events/store', [EventController::class, 'store'])->name('events.store');
+
+Route::get('/stores/{storeId}/events', [EventController::class, 'viewEvents'])->name('viewevents');
+Route::get('/events/{eventId}/store/{storeId}/products', [EventController::class, 'viewEventProducts'])->name('vieweventproducts');
+Route::post('/events/{eventId}/store/{storeId}/products/{productId}', [EventController::class, 'addEventProduct'])->name('addeventproduct');
+Route::get('/events/{eventId}/products', [BidController::class, 'showEventProducts'])->name('event.products');
+Route::get('/events', [EventController::class, 'buyerEvents'])->name('event.buyereventshow');
+Route::get('/events/{eventId}', [EventController::class, 'eventDetails'])->name('event.details');
+Route::post('/place-bid', [BidController::class, 'store'])->name('place.bid');

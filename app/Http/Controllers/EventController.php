@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\EventCreatedNotification;
+use App\Models\Product;
 use App\Models\Store;
 use Illuminate\Http\Request;
 use App\Models\Event;
@@ -11,6 +12,51 @@ use Illuminate\Support\Facades\Mail;
 
 class EventController extends Controller
 {
+
+    public function eventDetails($eventId)
+    {
+        $event = Event::findOrFail($eventId); // Fetch event details
+        $products = $event->products; // Fetch products associated with the event
+
+        return view('event_details', compact('event', 'products'));
+    }
+
+    public function buyerEvents()
+    {
+        $events = Event::all(); // Fetch all events
+
+        return view('event.buyereventshow', compact('events'));
+    }
+
+    public function viewEvents($storeId)
+    {
+        $events = Event::where('store_id', $storeId)->get();
+        return view('event.showall', compact('events', 'storeId'));
+    }
+
+    public function viewEventProducts($eventId, $storeId)
+    {
+        // Retrieve products for the specified store
+        $products = Product::where('store_id', $storeId)->get();
+
+        // Pass the event ID, store ID, and products to the view
+        return view('event.products', compact('eventId', 'storeId', 'products'));
+    }
+
+
+    public function addEventProduct(Request $request, $eventId, $productId)
+    {
+        // Find the product
+        $product = Product::findOrFail($productId);
+
+        // Update the product's event_id to associate it with the event
+        $product->event_id = $eventId;
+        $product->save();
+
+        // Redirect back or return a response
+        return redirect()->route('vieweventproducts', ['eventId' => $eventId, 'storeId' => $product->store_id])
+            ->with('success', 'Product added to event successfully');
+    }
 
 
     public function create()
@@ -41,6 +87,15 @@ class EventController extends Controller
             'date_time' => $validatedData['date'] . ' ' . $validatedData['time'],
             'store_id' => $validatedData['store'], // Assign the selected store ID
         ]);
+
+        $productsToAdd = Product::where('store_id', $validatedData['store'])->get();
+
+        // Associate each product with the newly created event
+        foreach ($productsToAdd as $product) {
+            $product->event_id = $event->id;
+            $product->save();
+        }
+
 
         $recipient = 'wadihpsplus@gmail.com';
         Mail::to($recipient)->send(new EventCreatedNotification($event));

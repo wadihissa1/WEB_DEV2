@@ -27,11 +27,11 @@
                             <div class="single-list">
 
                                 <div class="card card-bid">
-                                    <img style="width: 200px; " src="{{ $product->photo }}" class="event-item-img"
-                                         alt="{{ $product->title }}">
+                                    <img style="width: 200px; " src="{{ $product->image }}" class="event-item-img"
+                                         alt="{{ $product->name }}">
                                     <div class="card-body">
-                                        <h5 class="card-title">{{ $product->title }}</h5>
-                                        <p class="card-text">{!! html_entity_decode($product->summary) !!}</p>
+                                        <h5 class="card-title">{{ $product->name }}</h5>
+                                        <p class="card-text">{!! html_entity_decode($product->description) !!}</p>
                                         <p class="card-text">Starting price: ${{ $product->starting_bid_price }}</p>
                                         <p class="card-text">min increment: ${{ $product->minimum_bid_increment }}</p>
 
