@@ -31,7 +31,7 @@ Route::get("index", [WebsiteController::class, 'getindex'])->name('index'); // S
 Route::get("account", [WebsiteController::class, 'getaccount'])->name('account'); // Show account view
 Route::get("cart", [WebsiteController::class, 'getcart'])->name('cart'); // Show cart view
 Route::get("product/{id}", [WebsiteController::class, 'getproduct'])->name('product'); // Show product details
-Route::get("product_details", [WebsiteController::class, 'getproduct_details'])->name('product_details'); // Show product details
+Route::get("product_details/{id}", [WebsiteController::class, 'getproduct_details'])->name('product_details'); // Show product details
 Route::post('/login', [LoginController::class, 'login'])->name('login'); // Process login form submission
 Route::post('/register', [RegisterController::class, 'register'])->name('register'); // Process registration form submission
 Route::get('auth/google', [LoginController::class, 'redirectToGoogle'])->name('auth/google'); // Redirect to Google OAuth

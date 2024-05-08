@@ -60,9 +60,10 @@
     <h2 class="title">Featured Products</h2>
     
     <div class="row">
+        @foreach ($randomProducts as $product)
         <div class="col-4">
-            <a href="{{ route('product_details') }}"><img src="images/product-1.jpg"></a>
-            <h4>Red Printed T-Shirt</h4>
+            <a href="/product_details/{{ $product->id }}"><img src="images/product-1.jpg"></a>
+            <h4>{{ $product->name }}</h4>
             <div class="rating">
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
@@ -70,11 +71,15 @@
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star-o"></i>
             </div>
-            <p>$50.00</p>
+            <p>$ {{ $product->price }}</p>
+            <p>Qty: {{ $product->quantity }}</p>
         </div>
-        
-    
-        
+        @endforeach
+    </div>
+    <div class="paginate">
+        {{$randomProducts->links()}}
+    </div>
+</div> 
 
 <!-- Offer -->
 <div class="offer">

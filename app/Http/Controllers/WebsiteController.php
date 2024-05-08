@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Store;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use PhpParser\Builder\Function_;
 use SebastianBergmann\Template\Template;
@@ -13,8 +14,12 @@ class WebsiteController extends Controller
     //show home view
     public function getindex()
     {
+        $randomProducts = Product::inRandomOrder()->simplepaginate(5);
+
+
         return view('index', [
-            'userStore' => Store::latest()->simplepaginate(4)
+            'userStore' => Store::latest()->simplepaginate(5),
+            'randomProducts' => $randomProducts
         ]);
     }
 
@@ -40,9 +45,21 @@ class WebsiteController extends Controller
     }
 
     //show product detail view
-    public function getproduct_details()
+    public function getproduct_details($id)
     {
-        return view('product_details');
+        $product = Product::find($id);
+        $categoryId = $product->category_id;
+        $relatedProducts = Product::where('category_id', $categoryId)
+            ->where('id', '!=', $id) // Exclude the current product
+            ->simplepaginate(8); // Adjust the pagination limit as needed
+
+        // Retrieve store information associated with the product
+        $store = $product->store;
+        return view('product_details', [
+            'product' => $product,
+            'relatedProducts' => $relatedProducts,
+            'store' => $store,
+        ]);
     }
 
     //show profile view

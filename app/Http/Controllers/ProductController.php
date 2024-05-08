@@ -65,8 +65,8 @@ class ProductController extends Controller
     //show all products
         public function StoresDetails(){
         $store = auth()->user();
-        $storeProducts = Product::where('store_id', $store->id)->latest()->paginate(6);
-   
+        $storeProducts = Product::where('store_id', $store->id)->get();
+        $storeProduct = Product::all();
         return view('viewstore', [
             'store' => $store,
             'products' => $storeProducts
