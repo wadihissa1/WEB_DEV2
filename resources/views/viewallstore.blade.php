@@ -38,7 +38,9 @@
             text-align: left;
         }
 
-        td{
+        td {
+            max-width: 300px;
+            overflow: hidden;
             font-weight: 900;
         }
  
@@ -114,7 +116,7 @@
                     <tr>
                         <td>{{ $store->id }}</td>
                         <td>{{ $store->name }}</td>
-                        <td>{{ $store->description }}</td>
+                        <td style="word-wrap: break-word;">{{ $store->description }}</td>
                         <td><!--<a class="btn" href="{{ route('viewstore', ['store' => $store->id]) }}">View</a> -->
                         <a class="btn" href="{{ route('createproduct', ['storeId' => $store->id]) }}">Create Products</a>
                         <a class="btn" href="{{ route('viewproducts', ['storeId' => $store->id]) }}">View Products</a>

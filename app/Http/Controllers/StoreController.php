@@ -70,13 +70,6 @@ class StoreController extends Controller
     return view('viewpendingrequests', ['pendingRequests' => $pendingRequests]);
 }
 
-//  <!--   public function show($storeId)
-// {
-//     $store = Store::findOrFail($storeId);
-//     $products = $store->products()->paginate(6);
-
-//     return view('viewstore', ['store' => $store, 'products' => $products]);
-// } 
 public function edit($storeId)
 {
     $store = Store::findOrFail($storeId);
