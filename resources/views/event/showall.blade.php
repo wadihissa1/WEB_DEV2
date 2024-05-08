@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('content')
+    <a href="{{ route('viewallstores') }}" class="btn btn-primary">Go Back to Stores</a>
     <h1>Events for Store</h1>
 
     @if ($events->isEmpty())
@@ -8,7 +9,18 @@
     @else
         <ul>
             @foreach ($events as $event)
-                <li><a href="{{ route('vieweventproducts', ['eventId' => $event->id, 'storeId' => $storeId]) }}">{{ $event->name }}</a></li>
+                <li>
+                    <a href="{{ route('vieweventproducts', ['eventId' => $event->id, 'storeId' => $storeId]) }}">{{ $event->name }}</a>
+                    @if ($event->status === 'open')
+                        <form method="POST" action="{{ route('closeevent', ['eventId' => $event->id]) }}" style="display: inline;">
+                            @csrf
+                            @method('PUT')
+                            <button type="submit" class="btn btn-danger btn-sm">Close Event</button>
+                        </form>
+                    @else
+                        <span class="badge badge-secondary">Closed</span>
+                    @endif
+                </li>
             @endforeach
         </ul>
     @endif

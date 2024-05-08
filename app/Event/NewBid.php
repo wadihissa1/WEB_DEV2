@@ -22,6 +22,7 @@ class NewBid implements ShouldBroadcast
      */
     public function __construct(Bid $bid)
     {
+        $bid->load('product', 'user');
         $this->bid = $bid;
         \Log::info("Bid is: $bid");
     }

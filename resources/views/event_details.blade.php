@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <h1>Event Details: {{ $event->name }}</h1>
+    <h1>Event: {{ $event->name }}</h1>
     <p>Description: {{ $event->description }}</p>
 
     <h2>Products for Bidding</h2>
@@ -10,19 +10,31 @@
     @else
         <form id="bidform" method="POST" action="{{ route('place.bid') }}">
             @csrf
-            <input type="text" name="event_id" value="{{ $event->id }}">
-            <label for="product">Select Product:</label>
-            <select name="product_id" id="product_id">
-                @foreach ($products as $product)
-                    <option value="{{ $product->id }}">{{ $product->name }}</option>
-                @endforeach
-            </select>
-            <label for="bid_amount">Enter Bid Amount:</label>
-            <input type="number" name="bid" id="bid" step="0.01" min="0">
-            <button type="submit">Place Bid</button>
-        </form>
+            <input type="hidden" name="event_id" value="{{ $event->id }}">
 
+            <div class="product-cards">
+                @foreach ($products as $product)
+                    <div class="product-card">
+                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
+                        <div class="product-info">
+                            <input type="radio" name="product_id" id="product_{{ $product->id }}" value="{{ $product->id }}">
+                            <label for="product_{{ $product->id }}">{{ $product->description }}</label>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            <div>
+                <label for="bid_amount">Enter Bid Amount:</label>
+                <input type="number" name="bid" id="bid" step="0.01" min="0">
+            </div>
+
+            <div>
+                <button type="submit">Place Bid</button>
+            </div>
+        </form>
     @endif
+
     <div id="bids">
         <!-- Existing bids will be appended here -->
     </div>
@@ -44,12 +56,34 @@
             console.log('successfully subscribed!');
         });
 
-        // Bind to the 'new-bid' event
+        // Initialize variables
+        var highestBids = {};
+        var minimumRaise = 10; // Example: Minimum raise of $10
+
         channel.bind('NewBid', function(data) {
             var bid = data.bid;
-            var bidInfo = 'Product ID: ' + bid.product_id + ', New Bid: ' + bid.bid;
-            console.log("New Bid:", bidInfo);
+
+            // Calculate the minimum acceptable bid amount
+            var minimumBid = (highestBids[bid.product.id] || 0) + minimumRaise;
+
+
+            // Check if the new bid meets the minimum raise requirement
+            if ((bid.bid - (highestBids[bid.product.id] || 0)) < minimumRaise) {
+                // Append a message to the page indicating that the bid was below the minimum raise requirement
+                var bidsDiv = document.getElementById('bids');
+                bidsDiv.innerHTML += '<p>The bid was below the minimum raise requirement. Minimum raise: ' + minimumRaise + '</p>';
+                return; // Do not process the bid further
+            }
+
+
+            // Update highest bid for this product if it's higher than the current highest bid
+            if (!highestBids[bid.product.id] || bid.bid > highestBids[bid.product.id]) {
+                highestBids[bid.product.id] = bid.bid;
+            }
+
             // Append new bid information to the page
+            var bidInfo = '<b>' + bid.user.name + '</b> has placed a bid of <b>' + bid.bid + '</b> on the product <b>' + bid.product.name + '</b>. Highest bid: <b>' + highestBids[bid.product.id] + '</b>';
+            console.log("New Bid:", bidInfo);
             var bidsDiv = document.getElementById('bids');
             bidsDiv.innerHTML += '<p>' + bidInfo + '</p>';
         });
