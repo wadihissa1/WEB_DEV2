@@ -46,13 +46,27 @@ class ProductController extends Controller
      
         return redirect()->route('viewstore', ['store' => $request->store_id])->with('success', 'Product created successfully.');
     }
+
+
+
+
+    //shows product details blade
+    public function show($id)
+{
+    $products = Product::findOrFail($id);
+    
+    return view('product_details', ['product' => $products]); 
+}
+
+
+
     
  
     //show all products
         public function StoresDetails(){
         $store = auth()->user();
-        $storeProducts = Product::where('store_id', $store->id)->latest()->paginate(6);
-   
+        $storeProducts = Product::where('store_id', $store->id)->get();
+        $storeProduct = Product::all();
         return view('viewstore', [
             'store' => $store,
             'products' => $storeProducts

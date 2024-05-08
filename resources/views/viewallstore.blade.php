@@ -26,11 +26,13 @@
             text-align: center;
         }
 
+
         table {
             width: 80%;
             border-collapse: collapse;
             margin-top: 20px;
         }
+
 
         th, td {
             border: 1px solid  #ff523b;
@@ -42,12 +44,15 @@
             max-width: 300px;
             overflow: hidden;
             font-weight: 900;
+            max-width: 300px;
+            overflow: hidden;
         }
  
         th {
             background-color:  #ff523b;
             color: white;
         }
+
 
         .btn {
             display: inline-block;
@@ -59,6 +64,7 @@
             width: max-content;
             border-radius: 4px;
             border-color:  #ff523b;
+            border-color:  #ff523b;
         }
         .btn1 {
             padding: 8px 12px;
@@ -69,11 +75,15 @@
         transition: .2s;
         margin-top: 40px;
         }
+
         .btn1:hover{
             background-color: #fff;
         color: #ff523b;
         border: 4px solid #ff523b;
         }
+
+        
+
 
         
 
@@ -92,11 +102,12 @@
     </style>
 </head>
 <body>
+
 <div class="content">
 <h1>{{auth()->user()->name}} Stores:</h1>
-
-    <!-- Your Stores Section -->
-    <h2>Your Stores:</h2>
+<br>
+<br>
+<br>
    <a class="btn" href="{{ route('viewpendingrequests') }}">View Pending Requests</a>
 
     @if($userStores && $userStores->count() > 0)
@@ -131,8 +142,6 @@
         <button type="submit" class="btn" onclick="return confirm('Are you sure you want to delete this store?')">Delete</button>
     </form>
 </td>
-
-
                     </tr>
                 @endforeach
             </tbody>
@@ -145,3 +154,4 @@
 </body>
 </html>
 @endsection
+ 

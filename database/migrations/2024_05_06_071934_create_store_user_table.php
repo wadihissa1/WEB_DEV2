@@ -10,14 +10,15 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
-        Schema::create('store_user', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('store_id')->constrained('users')->cascadeOnDelete();
+{
+    Schema::create('store_user', function (Blueprint $table) {
+        $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+        $table->foreignId('store_id')->constrained()->cascadeOnDelete(); // Constrain to the stores table
 
-            $table->timestamps();
-        });
-    }
+        $table->timestamps();
+    });
+}
+
 
     /**
      * Reverse the migrations.

@@ -7,117 +7,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Products | RedStore</title>
+    <title>{{ $product->name }} | RedStore</title>
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
           rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
+<style>
+    .title{
+        margin-right:20px; 
+        margin-top: 50px;
+    }
+    .link{
+        text-decoration: underline;
+        color: blue;
+    }
+    p{
+        cursor: default;
+    }
+</style>
 <body>
 
 <!-- Single Products -->
 <div class="small-container single-product">
+
     <div class="row">
         <div class="col-2">
-            <img src="images/gallery-1.jpg" width="100%" id="ProductImg">
-
-            <div class="small-img-row">
-                <div class="small-img-col">
-                    <img src="images/gallery-1.jpg" width="100%" class="small-img">
-                </div>
-                <div class="small-img-col">
-                    <img src="images/gallery-2.jpg" width="100%" class="small-img">
-                </div>
-                <div class="small-img-col">
-                    <img src="images/gallery-3.jpg" width="100%" class="small-img">
-                </div>
-                <div class="small-img-col">
-                    <img src="images/gallery-4.jpg" width="100%" class="small-img">
-                </div>
-            </div>
+            <img src="{{ asset('/images/product-10.jpg') }}" width="100%" id="ProductImg">
 
         </div>
         <div class="col-2">
-            <p>Home / T-Shirt</p>
-            <h1>Red Printed T-Shirt by HRX</h1>
-            <h4>$50.00</h4>
-            <select>
-                <option>Select Size</option>
-                <option>XXL</option>
-                <option>XL</option>
-                <option>L</option>
-                <option>M</option>
-                <option>S</option>
-            </select>
+
+            <p>Home / {{ $product->category->name }}</p>
+            <h1>{{ $product->name }}</h1>
+            <h4>${{ $product->price }}</h4>
             <input type="number" value="1">
-            <a href="" class="btn">Add To Cart</a>
+            <a href="#" class="btn">Add To Cart</a>
 
             <h3>Product Details <i class="fa fa-indent"></i></h3>
             <br>
-            <p>Give your summer wardrobe a style upgrade with the HRX Men's Active T-Shirt. Team it with a pair of
-                shorts for your morning workout or a denims for an evening out with the guys.</p>
+            <p>{{ $product->description }}</p>
+            <br><br><br>
+            <p>Store : <a href="{{ route('viewstore', ['store' => $store->id]) }}" class="link">{{ $store->name }}</a></p>
         </div>
     </div>
 </div>
 <!-- title -->
-<div class="small-container">
-    <div class="row row-2">
-        <h2>Related Products</h2>
-        <p>View More</p>
-    </div>
-</div>
-<!-- Products -->
-<div class="small-container">
+<div class="related-products">
+    <h2 class="title">Related Products</h2>
     <div class="row">
+        @foreach ($relatedProducts as $relatedProduct)
         <div class="col-4">
-            <img src="images/product-9.jpg">
-            <h4>Red Printed T-Shirt</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-            <p>$50.00</p>
+            <a href="{{ route('product_details', ['id' => $relatedProduct->id]) }}">
+                <img src="{{ asset('/images/product-10.jpg') }}" alt="Product Image">
+            </a>
+            <h3>{{ $relatedProduct->name }}</h3>
+            <h4>${{ $relatedProduct->price }}</h4>
         </div>
-        <div class="col-4">
-            <img src="images/product-10.jpg">
-            <h4>Red Printed T-Shirt</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-            <p>$50.00</p>
-        </div>
-        <div class="col-4">
-            <img src="images/product-11.jpg">
-            <h4>Red Printed T-Shirt</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-            <p>$50.00</p>
-        </div>
-        <div class="col-4">
-            <img src="images/product-12.jpg">
-            <h4>Red Printed T-Shirt</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-            <p>$50.00</p>
-        </div>
+        @endforeach
+    </div>
+    <!-- Pagination links -->
+    <div class="paginate">
+        {{ $relatedProducts->links() }}
     </div>
 </div>
 
