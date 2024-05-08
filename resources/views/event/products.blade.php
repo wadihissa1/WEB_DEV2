@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <a href="{{ route('viewallstores') }}" class="btn btn-primary">Go Back to Stores</a>
+    <a href="/viewallstores/{id}" class="btn btn-primary">Go Back to Stores</a>
     <a href="{{ route('viewevents', ['storeId' => $storeId]) }}" class="btn btn-primary">View All Events</a>
     <h1>Products for Event</h1>
 

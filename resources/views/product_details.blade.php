@@ -1,7 +1,7 @@
 @extends('layout')
 @section('content')
 
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -13,16 +13,27 @@
           rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
+<style>
+    .title{
+        margin-right:20px;
+        margin-top: 50px;
+    }
+    .link{
+        text-decoration: underline;
+        color: blue;
+    }
+    p{
+        cursor: default;
+    }
+</style>
 <body>
 
 <!-- Single Products -->
 <div class="small-container single-product">
-    @dd($product)
 
     <div class="row">
         <div class="col-2">
-            <img src="" width="100%" id="ProductImg">
+            <img src="{{ asset('/images/product-10.jpg') }}" width="100%" id="ProductImg">
 
         </div>
         <div class="col-2">
@@ -36,67 +47,28 @@
             <h3>Product Details <i class="fa fa-indent"></i></h3>
             <br>
             <p>{{ $product->description }}</p>
+            <br><br><br>
+            <p>Store : <a href="{{ route('viewstore', ['store' => $store->id]) }}" class="link">{{ $store->name }}</a></p>
         </div>
     </div>
 </div>
 <!-- title -->
-<div class="small-container">
-    <div class="row row-2">
-        <h2>Related Products</h2>
-        <p>View More</p>
-    </div>
-</div>
-<!-- Products -->
-<div class="small-container">
+<div class="related-products">
+    <h2 class="title">Related Products</h2>
     <div class="row">
-        <div class="col-4">
-            <img src="images/product-9.jpg">
-            <h4>Red Printed T-Shirt</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
+        @foreach ($relatedProducts as $relatedProduct)
+            <div class="col-4">
+                <a href="{{ route('product_details', ['id' => $relatedProduct->id]) }}">
+                    <img src="{{ asset('/images/product-10.jpg') }}" alt="Product Image">
+                </a>
+                <h3>{{ $relatedProduct->name }}</h3>
+                <h4>${{ $relatedProduct->price }}</h4>
             </div>
-            <p>$50.00</p>
-        </div>
-        <div class="col-4">
-            <img src="images/product-10.jpg">
-            <h4>Red Printed T-Shirt</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-            <p>$50.00</p>
-        </div>
-        <div class="col-4">
-            <img src="images/product-11.jpg">
-            <h4>Red Printed T-Shirt</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-            <p>$50.00</p>
-        </div>
-        <div class="col-4">
-            <img src="images/product-12.jpg">
-            <h4>Red Printed T-Shirt</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-            <p>$50.00</p>
-        </div>
+        @endforeach
+    </div>
+    <!-- Pagination links -->
+    <div class="paginate">
+        {{ $relatedProducts->links() }}
     </div>
 </div>
 
