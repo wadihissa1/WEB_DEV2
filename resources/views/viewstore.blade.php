@@ -37,21 +37,21 @@
     <div class="container_head">
         <img src="{{ asset('images/user-2.png') }}" alt="">
         <h1>{{ $store->name }}</h1>
-        <p>Description: {{ $store->description }}</p>
+        <p style="word-wrap: break-word;">Description: {{ $store->description }}</p>
 
         @if (Auth::id() !== $user->id)
         <div class="follow">
-            {{-- @if (Auth::User()->follows($store)) --}}
-            {{-- <form method="POST" action="{{ route('users.unfollow', $store->id) }}">
+            @if (Auth::User()->follows($store))
+            <form method="POST" action="{{ route('users.unfollow', $store->id) }}">
                 @csrf
                 <button type="submit" class="button" style="background-color: red">Unfollow</button>
             </form>
-            @else --}}
+            @else
             <form method="POST" action="{{ route('users.follow', $store->id) }}">
                 @csrf
                 <button type="submit" class="button">Follow</button>
             </form>
-            {{-- @endif --}}
+            @endif
         </div>
         @endif
     </div>
@@ -66,7 +66,7 @@
 
                 @foreach ($products as $product)
                 <div class="col-4">
-                    <a href="/viewstore/{{ $product->id }}"><img src="{{ asset('images/product-1.jpg') }}"></a>
+                    <a href="{{ route('product_details', ['id' => $product->id]) }}"><img src="{{ asset('images/product-1.jpg') }}"></a>
                     <center>
                         <h3>{{ $product->name }}</h3>
                     </center>

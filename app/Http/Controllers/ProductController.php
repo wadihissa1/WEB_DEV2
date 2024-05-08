@@ -46,6 +46,20 @@ class ProductController extends Controller
      
         return redirect()->route('viewstore', ['store' => $request->store_id])->with('success', 'Product created successfully.');
     }
+
+
+
+
+    //shows product details blade
+    public function show($id)
+{
+    $products = Product::findOrFail($id);
+    
+    return view('product_details', ['product' => $products]); 
+}
+
+
+
     
  
     //show all products
