@@ -185,10 +185,15 @@ class EventController extends Controller
         }
 
 
-        $recipient = 'wadihpsplus@gmail.com';
-        Mail::to($recipient)->send(new EventCreatedNotification($event));
-        dd($request->all());
-        // Optionally, redirect the user to a relevant page or show a success message
-       // return redirect()->route('events.show', $event->id)->with('success', 'Event created successfully');
+        $followers = User::whereHas('following', function ($query) use ($validatedData) {
+            $query->where('store_id', $validatedData['store']);
+        })->get();
+
+        // Send notification emails to all followers
+        foreach ($followers as $follower) {
+            Mail::to($follower->email)->send(new EventCreatedNotification($event));
+        }
+
+       return redirect()->route('events.create', $event->id)->with('success', 'Event created successfully');
     }
 }

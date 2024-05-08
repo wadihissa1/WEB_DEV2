@@ -1,4 +1,6 @@
-<!-- Event creation form -->
+@extends('layout')
+
+@section('content')
 <form method="POST" action="{{ route('events.store') }}">
     @csrf
     <label for="name">Event Name:</label>
@@ -24,3 +26,9 @@
 
     <button type="submit">Create Event</button>
 </form>
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+@endsection
