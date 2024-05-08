@@ -1,9 +1,9 @@
 @extends('layout')
 @section('content')
 
-    
 
-<!DOCTYPE html>
+
+    <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -17,21 +17,21 @@
 
 
 <body>
- <div class="header" style="margin-top: -70px">
-        <div class="container">
-            <div class="row">
-                <div class="col-2">
-                    <h1>Give Your Workout <br> A New Style!</h1>
-                    <p>Success isn't always about greatness. It;s about consistency. Consistent <br> hard work gains
-                        success. Greatness will come.</p>
-                    <a href="" class="btn">Explore Now &#8594;</a>
-                </div>
-                <div class="col-2">
-                    <img src="images/image1.png">
-                </div>
+<div class="header" style="margin-top: -70px">
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <h1>Give Your Workout <br> A New Style!</h1>
+                <p>Success isn't always about greatness. It;s about consistency. Consistent <br> hard work gains
+                    success. Greatness will come.</p>
+                <a href="" class="btn">Explore Now &#8594;</a>
+            </div>
+            <div class="col-2">
+                <img src="images/image1.png">
             </div>
         </div>
     </div>
+</div>
 <!-- Feadtued stores  -->
 
 <div class="categories">
@@ -41,11 +41,11 @@
 
             @foreach ($userStore as $store)
 
-            <div class="col-4">
-                <a href="/viewstore/{{ $store->id }}"><img src="images/product-1.jpg"></a>
-                <center><h3>{{ $store->name }}</h3></center>
-            </div>
-                
+                <div class="col-4">
+                    <a href="/viewstore/{{ $store->id }}"><img src="images/product-1.jpg"></a>
+                    <center><h3>{{ $store->name }}</h3></center>
+                </div>
+
             @endforeach
         </div>
     </div>
@@ -58,28 +58,28 @@
 
 <div>
     <h2 class="title">Featured Products</h2>
-    
+
     <div class="row">
         @foreach ($randomProducts as $product)
-        <div class="col-4">
-            <a href="/product_details/{{ $product->id }}"><img src="images/product-1.jpg"></a>
-            <h4>{{ $product->name }}</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
+            <div class="col-4">
+                <a href="/product_details/{{ $product->id }}"><img src="images/product-1.jpg"></a>
+                <h4>{{ $product->name }}</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <p>$ {{ $product->price }}</p>
+                <p>Qty: {{ $product->quantity }}</p>
             </div>
-            <p>$ {{ $product->price }}</p>
-            <p>Qty: {{ $product->quantity }}</p>
-        </div>
         @endforeach
     </div>
     <div class="paginate">
         {{$randomProducts->links()}}
     </div>
-</div> 
+</div>
 
 <!-- Offer -->
 <div class="offer">
@@ -172,7 +172,7 @@
         </div>
     </div>
 </div>
-    </div>
+</div>
 </div>
 
 

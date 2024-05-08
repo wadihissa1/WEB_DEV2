@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class ChooseActionController extends Controller
 {
-    
+
     public function index()
     {
         $userId = auth()->id(); // Get the ID of the currently authenticated user

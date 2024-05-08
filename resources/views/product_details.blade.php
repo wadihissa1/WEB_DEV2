@@ -1,7 +1,7 @@
 @extends('layout')
 @section('content')
-    
-<!DOCTYPE html>
+
+    <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -15,7 +15,7 @@
 </head>
 <style>
     .title{
-        margin-right:20px; 
+        margin-right:20px;
         margin-top: 50px;
     }
     .link{
@@ -57,13 +57,13 @@
     <h2 class="title">Related Products</h2>
     <div class="row">
         @foreach ($relatedProducts as $relatedProduct)
-        <div class="col-4">
-            <a href="{{ route('product_details', ['id' => $relatedProduct->id]) }}">
-                <img src="{{ asset('/images/product-10.jpg') }}" alt="Product Image">
-            </a>
-            <h3>{{ $relatedProduct->name }}</h3>
-            <h4>${{ $relatedProduct->price }}</h4>
-        </div>
+            <div class="col-4">
+                <a href="{{ route('product_details', ['id' => $relatedProduct->id]) }}">
+                    <img src="{{ asset('/images/product-10.jpg') }}" alt="Product Image">
+                </a>
+                <h3>{{ $relatedProduct->name }}</h3>
+                <h4>${{ $relatedProduct->price }}</h4>
+            </div>
         @endforeach
     </div>
     <!-- Pagination links -->

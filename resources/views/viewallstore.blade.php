@@ -1,6 +1,6 @@
 @extends('layout')
 @section('content')
-    
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +18,7 @@
             background-position: center;
             backdrop-filter: blur(10px);
         }
-         
+
         h1{
             color: #ff523b;
             font-size: 55px;
@@ -47,7 +47,7 @@
             max-width: 300px;
             overflow: hidden;
         }
- 
+
         th {
             background-color:  #ff523b;
             color: white;
@@ -82,7 +82,7 @@
         border: 4px solid #ff523b;
         }
 
-        
+
 
 
         
@@ -131,7 +131,9 @@
                         <td><!--<a class="btn" href="{{ route('viewstore', ['store' => $store->id]) }}">View</a> -->
                         <a class="btn" href="{{ route('createproduct', ['storeId' => $store->id]) }}">Create Products</a>
                         <a class="btn" href="{{ route('viewproducts', ['storeId' => $store->id]) }}">View Products</a>
-                    </td> 
+                            <a class="btn" href="{{ route('viewevents', ['storeId' => $store->id]) }}">View Events</a>
+
+                        </td>
                     <td>
     <a class="btn" href="{{ route('editstore', ['storeId' => $store->id]) }}">Edit</a>
 </td>
@@ -154,4 +156,3 @@
 </body>
 </html>
 @endsection
- 

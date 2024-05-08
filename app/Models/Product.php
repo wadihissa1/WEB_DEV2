@@ -1,14 +1,14 @@
 <?php
- 
+
 namespace App\Models;
- 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
- 
+
 class Product extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'description', 'price', 'quantity', 'image', 'category_id'];
+    protected $fillable = ['name', 'description', 'price', 'quantity', 'image', 'category_id', 'store_id', 'event_id'];
 
     public function store()
     {
@@ -27,5 +27,15 @@ class Product extends Model
         return $this->hasMany(Review::class);
     }
 
+    public function bids()
+    {
+        return $this->hasMany(Bid::class);
+    }
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+    }
+
+
 }
- 
