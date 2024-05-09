@@ -49,7 +49,7 @@ Route::get('verify/email/{token}', [VerificationController::class, 'verifyEmail'
 // Choose action route
 Route::get('/chooseaction/{id}', [ChooseActionController::class, 'index'])->name('chooseaction'); // Show choose action page
 
-//botman 
+//botman
 Route::match(['get','post'],'/botman', 'App\Http\Controllers\BotManController@handle');
 
 
@@ -213,7 +213,7 @@ Route::post('/events/{eventId}/store/{storeId}/products/{productId}', [EventCont
 Route::get('/events/{eventId}/products', [BidController::class, 'showEventProducts'])->name('event.products');
 Route::get('/events', [EventController::class, 'buyerEvents'])->name('event.buyereventshow');
 Route::get('/events/{eventId}', [EventController::class, 'eventDetails'])->name('event.details');
-Route::post('/place-bid', [BidController::class, 'store'])->name('place.bid');
+Route::post('/place-bid', [BidController::class, 'store'])->name('place.bid')->middleware('auth');
 Route::put('/events/{eventId}/close', [EventController::class, 'closeEvent'])->name('closeevent');
 // Category routes
 Route::get('/createcategory', [CategoryController::class, 'create'])->name('createcategory'); // Show category creation form
