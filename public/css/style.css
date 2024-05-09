@@ -388,7 +388,7 @@ th:last-child{
 .form-container{
     background: #fff;
     width: 300px;
-    height: 400px;
+    height: 450px;
     position: relative;
     text-align: center;
     padding: 20px 0;
@@ -452,7 +452,9 @@ form a{
 .btn-google {
     background-color: #2984FE;
     color: #ffffff;
-    border: none;
+    padding: 10px 20px; /* Adjust padding as needed */
+    border-radius: 5px; /* Optional: Add border radius for rounded corners */
+    text-decoration: none; /* Remove underline */
 }
 
 .btn-google:hover {
@@ -460,6 +462,21 @@ form a{
 }
 
 .btn-google i {
+    padding-right: 8px; /* Adjust as needed */
+}
+
+.btn-github {
+    background-color: #6e5494; /* GitHub purple color */
+    color: #fff; /* Text color */
+    padding: 10px 20px; /* Adjust padding as needed */
+    border-radius: 5px; /* Optional: Add border radius for rounded corners */
+    text-decoration: none; /* Remove underline */
+}
+
+.btn-github:hover {
+    background-color: #5a4780; /* Darker shade on hover */
+}
+.btn-github i {
     padding-right: 8px; /* Adjust as needed */
 }
 

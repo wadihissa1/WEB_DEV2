@@ -104,4 +104,9 @@
 
     <button type="submit">Create Event</button>
 </form>
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 @endsection

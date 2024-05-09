@@ -29,15 +29,16 @@ class BidController extends Controller
             $validatedData = $request->validate([
                 'bid' => 'required|numeric',
                 'product_id' => 'required|exists:products,id',
+                'user_id' => 'required|exists:users,id',
                 'event_id' => 'required|exists:events,id',
-                // Assuming userId is passed from the form
+
             ]);
 
             // Create the bid
             $bid = Bid::create([
                 'bid' => $validatedData['bid'],
                 'product_id' => $validatedData['product_id'],
-                'user_id' => auth()->id(),  // Use userId from form data
+                'user_id' => $validatedData['user_id'],  // Use userId from form data
                 'event_id' => $validatedData['event_id'], // Include event_id
             ]);
 

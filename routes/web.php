@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\BidController;
+use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProfileController;
@@ -15,6 +17,9 @@ use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,7 +54,7 @@ Route::get('verify/email/{token}', [VerificationController::class, 'verifyEmail'
 // Choose action route
 Route::get('/chooseaction/{id}', [ChooseActionController::class, 'index'])->name('chooseaction'); // Show choose action page
 
-//botman 
+//botman
 Route::match(['get','post'],'/botman', 'App\Http\Controllers\BotManController@handle');
 
 
@@ -141,7 +146,14 @@ Route::delete('/deletestore/{storeId}', [StoreController::class, 'destroy'])->na
     Route::get('/admin/viewcategories', [AdminController::class, 'viewCategories'])->name('admin.viewcategories');
      // Route::get('/createcategory', [CategoryController::class, 'create'])->name('createcategory');
    Route::get('/viewcategories', [AdminController::class, 'viewCategories'])->name('viewcategories');
+   Route::get('/admin-dashboard', [AdminController::class,"index"])->name('admin.dashboard');
+   //Route::post('/admin/activate-store/{store}', [AdminController::class,'activateStore'])->name('admin.activateStore');
+  /// Route::post('/admin/deactivate-store/{store}', [AdminController::class,'deactivateStore'])->name('admin.deactivateStore');
+  // Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+  Route::post('/admin/activate-store/{storeId}', [StoreController::class, 'activateStore'])->name('admin.activateStore');
 
+  // Route for deactivating a store
+  Route::post('/admin/deactivate-store/{storeId}', [StoreController::class, 'deactivateStore'])->name('admin.deactivateStore');
 
 
 //Route::post('/store/product', [ProductController::class, 'store'])->name('store.product');
@@ -152,12 +164,12 @@ Route::post('/store', [StoreController::class, 'store'])->name('stores.store');
 
 //tell wadih about the change from view to show
 Route::get('/viewstore/{store}', [StoreController::class, 'show'])->name('viewstore');
-Route::get('/viewstore/{store}', [StoreController::class, 'view'])->name('viewstore');
+Route::get('/viewstore/{store}', [StoreController::class, 'view'])->name('viewstore.a');
 
 
 
 // Route to view all stores for the current user
-Route::get('/viewallstores/{id}', [StoreController::class, 'viewAllStores'])->name('viewallstores');
+Route::get('/viewallstores/{id}', [StoreController::class, 'viewAllStores'])->name('viewallstores.a');
 Route::get('/createproduct/{storeId}', [ProductController::class, 'create'])->name('createproduct');
 Route::post('/storeproduct', [ProductController::class, 'store'])->name('storeproduct');
 // Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
@@ -203,21 +215,39 @@ Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 Route::post('/admin/approve/{storeRequest}', [AdminController::class, 'approveRequest'])->name('admin.approveRequest');
 Route::post('/admin/reject/{storeRequest}', [AdminController::class, 'rejectRequest'])->name('admin.rejectRequest');
 
+//Events and bid routes
 Route::post('/bids/store', 'BidController@store')->name('bids.store');
 Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
-
 Route::post('/events/store', [EventController::class, 'store'])->name('events.store');
-
 Route::get('/stores/{storeId}/events', [EventController::class, 'viewEvents'])->name('viewevents');
 Route::get('/events/{eventId}/store/{storeId}/products', [EventController::class, 'viewEventProducts'])->name('vieweventproducts');
 Route::post('/events/{eventId}/store/{storeId}/products/{productId}', [EventController::class, 'addEventProduct'])->name('addeventproduct');
 Route::get('/events/{eventId}/products', [BidController::class, 'showEventProducts'])->name('event.products');
 Route::get('/events', [EventController::class, 'buyerEvents'])->name('event.buyereventshow');
 Route::get('/events/{eventId}', [EventController::class, 'eventDetails'])->name('event.details');
-Route::post('/place-bid', [BidController::class, 'store'])->name('place.bid');
-
+Route::post('/place-bid', [BidController::class, 'store'])->name('place.bid')->middleware('auth');
 Route::put('/events/{eventId}/close', [EventController::class, 'closeEvent'])->name('closeevent');
 // Category routes
 Route::get('/createcategory', [CategoryController::class, 'create'])->name('createcategory'); // Show category creation form
 Route::post('/storecategory', [CategoryController::class, 'store'])->name('storecategory'); // Process category creation form submission
 Route::get('/viewcategories', [AdminController::class, 'viewCategories'])->name('viewcategories'); // Show all categories
+
+//forget password routes
+Route::get('/forgot-password', [ForgotPasswordController::class,'showForgotPasswordForm'])->name('forgot.password.form');
+Route::post('/forgot-password', [ForgotPasswordController::class,'sendPasswordResetLink'])->name('forgot.password.send');
+Route::get('/reset-password/{token}', [ResetPasswordController::class,'showResetPasswordForm'])->name('reset.password.form');
+Route::post('/reset-password', [ResetPasswordController::class,'resetPassword'])->name('reset.password');
+Route::get('/reset-your-password', [LoginController::class,'showForgotPasswordForm'])->name('forgot.password');
+
+//github sign in
+Route::get('/login/github', [LoginController::class,'redirectToGitHub'])->name('login.github');
+Route::get('/login/github/callback', [LoginController::class,'handleGitHubCallback']);
+Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
+Route::post('/cart/add/{productId}', [CartController::class, 'addToCart'])->name('cart.add');
+Route::post('/cart/update/{productId}', [CartController::class, 'updateCart'])->name('cart.update');
+Route::post('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
+
+Route::post('/orders/store', [OrderController::class, 'store'])->name('orders.store');
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+
+Route::post('/cart/convert', [CartController::class, 'convertCurrency'])->name('cart.convert');
