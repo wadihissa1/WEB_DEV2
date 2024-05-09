@@ -228,7 +228,11 @@
                 @foreach($categories as $category)
                 <tr>
                     <td>{{ $category->name }}</td>
-                    <td style="width: 20%;" ><button type="submit" class="dlt_btn">Delete</button></td>
+                    <td style="width: 20%;" > <form action="{{ route('delete.category', $category->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="dlt_btn" onclick="return confirm('Are you sure you want to delete this category?')">Delete</button>
+            </form></td>
                 </tr>
                 @endforeach
             </tbody>
@@ -251,6 +255,7 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Status</th>
+                <th>User Active</th>
             </tr>
         </thead>
         <tbody>
@@ -261,6 +266,13 @@
                 <td>{{ $store->name }}</td>
                 <td>{{ $store->description }}</td>
                 <td>{{ $store->status }}</td>
+                <td>
+                    @if($store->active)
+                        Active
+                    @else
+                        Deactive
+                    @endif
+                </td>
                 <td>
                 <form action="{{ route('admin.activateStore', $store->id) }}" method="POST">
     @csrf

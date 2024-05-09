@@ -144,6 +144,7 @@ Route::delete('/deletestore/{storeId}', [StoreController::class, 'destroy'])->na
 
   // Route for deactivating a store
   Route::post('/admin/deactivate-store/{storeId}', [StoreController::class, 'deactivateStore'])->name('admin.deactivateStore');
+  Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('delete.category');
 
 
 //Route::post('/store/product', [ProductController::class, 'store'])->name('store.product');
