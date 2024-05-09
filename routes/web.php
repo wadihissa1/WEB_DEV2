@@ -240,12 +240,12 @@ Route::get('/reset-your-password', [LoginController::class,'showForgotPasswordFo
 //github sign in
 Route::get('/login/github', [LoginController::class,'redirectToGitHub'])->name('login.github');
 Route::get('/login/github/callback', [LoginController::class,'handleGitHubCallback']);
+
+
 Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
 Route::post('/cart/add/{productId}', [CartController::class, 'addToCart'])->name('cart.add');
 Route::post('/cart/update/{productId}', [CartController::class, 'updateCart'])->name('cart.update');
 Route::post('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
-
 Route::post('/orders/store', [OrderController::class, 'store'])->name('orders.store');
 Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-
 Route::post('/cart/convert', [CartController::class, 'convertCurrency'])->name('cart.convert');

@@ -24,11 +24,11 @@
                 <li><a href="">About</a></li>
                 <li><a href="">Contact</a></li>
                 <li><a href="{{ route('account') }}">Account</a></li>
-                <!-- Add a link to see events -->
+
                 <li><a href="{{ route('event.buyereventshow', ['userId' => $userId]) }}">See Events</a></li>
             </ul>
         </nav>
-        
+
         <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
     </div>
 </div>

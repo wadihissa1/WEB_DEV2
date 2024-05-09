@@ -42,13 +42,24 @@
             <h1>{{ $product->name }}</h1>
             <h4>${{ $product->price }}</h4>
             <input type="number" value="1">
-            <a href="#" class="btn">Add To Cart</a>
+
+            <form method="post" action="{{ route('cart.add', ['productId' => $product->id]) }}">
+                @csrf
+                <button type="submit" class="btn">Add to Cart</button>
+            </form>
 
             <h3>Product Details <i class="fa fa-indent"></i></h3>
             <br>
             <p>{{ $product->description }}</p>
             <br><br><br>
             <p>Store : <a href="{{ route('viewstore', ['store' => $store->id]) }}" class="link">{{ $store->name }}</a></p>
+            <a href="{{ route('cart.show')}}">view cart</a>
+            @if (session('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
+
         </div>
     </div>
 </div>

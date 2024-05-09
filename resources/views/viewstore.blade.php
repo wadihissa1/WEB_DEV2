@@ -196,7 +196,7 @@
                 @endforeach
 
             </div>
-            @endforeach
+
         </div>
 
         <div class="paginate">
