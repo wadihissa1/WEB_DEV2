@@ -32,7 +32,7 @@ class WebsiteController extends Controller
     //show cart view
     public function getcart()
     {
-        return view('cart');
+        return view('cartblade');
     }
 
     //
