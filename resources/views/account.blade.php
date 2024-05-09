@@ -54,8 +54,8 @@
 
                             <button type="submit" class="btn">Login</button>
 
-                            <a href="#">Forget Password</a>
-
+                            <!-- <a href="#">Forget Password</a> -->
+                            <a href="">Forgot Password?</a>
                             <a href="{{ route('auth/google') }}" class="btn btn-google"> 
                                 <i class="fab fa-google"></i>Sign in with Google</a>
 

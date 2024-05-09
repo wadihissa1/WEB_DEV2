@@ -12,7 +12,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\ReviewController;
-
+use App\Http\Controllers\Auth\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,7 +68,13 @@ Route::get("profile", 'App\Http\Controllers\WebsiteController@getprofile')->name
  
  
 Route::get('verify/email/{token}', 'App\Http\Controllers\VerificationController@verifyEmail')->name('email.verify');
- 
+
+
+
+
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+
  
 //Route::get('/chooseaction', [VerificationController::class, 'verifyEmail'])->name('chooseaction');
 Route::get('/chooseaction/{id}', [ChooseActionController::class, 'index'])->name('chooseaction');
@@ -130,7 +136,14 @@ Route::delete('/deletestore/{storeId}', [StoreController::class, 'destroy'])->na
     Route::get('/admin/viewcategories', [AdminController::class, 'viewCategories'])->name('admin.viewcategories');
      // Route::get('/createcategory', [CategoryController::class, 'create'])->name('createcategory');
    Route::get('/viewcategories', [AdminController::class, 'viewCategories'])->name('viewcategories');
-   
+   Route::get('/admin-dashboard', [AdminController::class,"index"])->name('admin.dashboard');
+   //Route::post('/admin/activate-store/{store}', [AdminController::class,'activateStore'])->name('admin.activateStore');
+  /// Route::post('/admin/deactivate-store/{store}', [AdminController::class,'deactivateStore'])->name('admin.deactivateStore');
+  // Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+  Route::post('/admin/activate-store/{storeId}', [StoreController::class, 'activateStore'])->name('admin.activateStore');
+
+  // Route for deactivating a store
+  Route::post('/admin/deactivate-store/{storeId}', [StoreController::class, 'deactivateStore'])->name('admin.deactivateStore');
 
 
 //Route::post('/store/product', [ProductController::class, 'store'])->name('store.product');
