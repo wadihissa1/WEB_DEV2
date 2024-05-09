@@ -222,3 +222,7 @@ Route::post('/forgot-password', [ForgotPasswordController::class,'sendPasswordRe
 Route::get('/reset-password/{token}', [ResetPasswordController::class,'showResetPasswordForm'])->name('reset.password.form');
 Route::post('/reset-password', [ResetPasswordController::class,'resetPassword'])->name('reset.password');
 Route::get('/reset-your-password', [LoginController::class,'showForgotPasswordForm'])->name('forgot.password');
+
+//github sign in
+Route::get('/login/github', [LoginController::class,'redirectToGitHub'])->name('login.github');
+Route::get('/login/github/callback', [LoginController::class,'handleGitHubCallback']);

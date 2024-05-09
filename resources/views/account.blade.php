@@ -52,13 +52,18 @@
 
                             <input type="password" id="password1" name="password" placeholder="Enter Password">
 
+                            @if ($errors->has('login_failed'))
+                                <p style="color: red;font-size: 12px;">{{ $errors->first('login_failed') }}</p>
+                            @endif
+
                             <button type="submit" class="btn">Login</button>
-
-                            <a href="{{ route('forgot.password') }}">Forgot password?</a>
-
 
                             <a href="{{ route('auth/google') }}" class="btn btn-google">
                                 <i class="fab fa-google"></i>Sign in with Google</a>
+                            <a href="{{ route('login.github') }}" class="btn btn-github">
+                                <i class="fab fa-github"></i> Sign in with GitHub
+                            </a>
+                            <a href="{{ route('forgot.password') }}">Forgot password?</a>
 
                         </form>
 
@@ -78,7 +83,13 @@
                             </select>
 
                             <button type="submit" class="btn">Register</button>
+                            @if(session('success'))
+                                <p style="color: green;font-size: 12px;">{{ session('success') }}</p>
+                            @endif
 
+                            @if ($errors->has('registration_failed'))
+                                <p style="color: red;font-size: 12px;">{{ $errors->first('registration_failed') }}</p>
+                            @endif
                         </form>
 
                     </div>

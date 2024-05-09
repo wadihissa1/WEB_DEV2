@@ -83,6 +83,47 @@ class LoginController extends Controller
         }
     }
 
+    public function redirectToGitHub(){
+
+        return Socialite::driver('github')->redirect();
+    }
+
+    public function handleGitHubCallback()
+    {
+        try {
+            $githubUser = Socialite::driver('github')->user();
+        } catch (\Exception $e) {
+            Log::error('GitHub OAuth ClientException: ' . $e->getMessage());
+            return redirect('/account')->withErrors(['error' => 'GitHub login failed.']);
+        }
+
+        // Check if the user exists in your database based on their email
+        $existingUser = User::where('email', $githubUser->getEmail())->first();
+
+        if ($existingUser) {
+            // If the user already exists, log them in
+            Auth::login($existingUser);
+            return redirect()->route('product', ['id' => $existingUser->id]);
+        } else {
+            // If the user doesn't exist, create a new user account
+            $newUser = new User();
+            $newUser->name = $githubUser->getName() ?? 'GitHub User';
+            $newUser->email = $githubUser->getEmail();
+            $newUser->verified = true;
+            // You may want to set a random password or leave it empty depending on your application's requirements
+            $newUser->password = bcrypt(1234);
+            // Alternatively, you can redirect the user to a page to set their password after registration
+            // $newUser->password = null;
+            $newUser->save();
+
+            // Log in the newly created user
+            Auth::login($newUser);
+
+            return redirect()->route('product', ['id' => $newUser->id]);
+        }
+    }
+
+
     public function showForgotPasswordForm()
     {
         return view('forgot-password');

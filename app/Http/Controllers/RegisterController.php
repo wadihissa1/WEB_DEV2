@@ -39,10 +39,10 @@ class RegisterController extends Controller
                 return redirect()->route('chooseaction', ['id' => $user->id]);
             }
 
-            return "Registration successful! Please check your email to verify your account.";
+            return redirect()->back()->with('success', 'Registration successful! Please check your email to verify your account.');
         } catch (\Exception $e) {
             // Log or display the full exception message
-            return $e->getMessage();
+            return redirect()->back()->withErrors(['registration_failed' => $e->getMessage()]);
         }
     }
 
