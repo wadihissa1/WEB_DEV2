@@ -38,23 +38,37 @@ class StoreController extends Controller
  
     //cant name view changed to show
    
+    // public function viewAllStores()
+    // {
+    //     $user = auth()->user();
+       
+    //     // Get only the approved stores
+    //     $userStores = Store::where('user_id', $user->id)
+    //     ->where('status', 'approved')
+    //     ->get();
+       
+    //     $userStore = Store::all();
+ 
+ 
+    //     return view('viewallstore', [
+    //         'userStores' => $userStores,
+    //     ]);
+       
+    // }
     public function viewAllStores()
-    {
-        $user = auth()->user();
-       
-        // Get only the approved stores
-        $userStores = Store::where('user_id', $user->id)
+{
+    $user = auth()->user();
+   
+    // Get only the approved and active stores
+    $userStores = Store::where('user_id', $user->id)
         ->where('status', 'approved')
+        ->where('active', true)
         ->get();
-       
-        $userStore = Store::all();
- 
- 
-        return view('viewallstore', [
-            'userStores' => $userStores,
-        ]);
-       
-    }
+
+    return view('viewallstore', [
+        'userStores' => $userStores,
+    ]);
+}
 
 
     public function viewPendingRequests()
@@ -113,6 +127,22 @@ public function destroy($storeId)
             'products' => $products
         ]);
     }
-
+    public function activateStore($storeId)
+    {
+        $store = Store::findOrFail($storeId);
+        $store->active = true;
+        $store->save();
+    
+        return redirect()->route('admin.dashboard')->with('success', 'Store activated successfully.');
+    }
+    
+    public function deactivateStore($storeId)
+    {
+        $store = Store::findOrFail($storeId);
+        $store->active = false;
+        $store->save();
+    
+        return redirect()->route('admin.dashboard')->with('success', 'Store deactivated successfully.');
+    }
 }
  

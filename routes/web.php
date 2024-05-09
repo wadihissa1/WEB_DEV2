@@ -141,7 +141,14 @@ Route::delete('/deletestore/{storeId}', [StoreController::class, 'destroy'])->na
     Route::get('/admin/viewcategories', [AdminController::class, 'viewCategories'])->name('admin.viewcategories');
      // Route::get('/createcategory', [CategoryController::class, 'create'])->name('createcategory');
    Route::get('/viewcategories', [AdminController::class, 'viewCategories'])->name('viewcategories');
+   Route::get('/admin-dashboard', [AdminController::class,"index"])->name('admin.dashboard');
+   //Route::post('/admin/activate-store/{store}', [AdminController::class,'activateStore'])->name('admin.activateStore');
+  /// Route::post('/admin/deactivate-store/{store}', [AdminController::class,'deactivateStore'])->name('admin.deactivateStore');
+  // Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+  Route::post('/admin/activate-store/{storeId}', [StoreController::class, 'activateStore'])->name('admin.activateStore');
 
+  // Route for deactivating a store
+  Route::post('/admin/deactivate-store/{storeId}', [StoreController::class, 'deactivateStore'])->name('admin.deactivateStore');
 
 
 //Route::post('/store/product', [ProductController::class, 'store'])->name('store.product');

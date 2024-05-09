@@ -153,6 +153,7 @@
         <a href="#" onclick="showPendingRequests()">Pending Requests</a>
         <a href="#" onclick="showCreateCategories()">Create Categories</a>
         <a href="#" onclick="showViewCategories()">View Categories</a>
+        <a href="#" onclick="showApprovedStores()">Approved Stores</a>
     </div>
 
     <!-- Content -->
@@ -238,8 +239,50 @@
         <h1>No categories found.</h1>
         </div>
         @endif
-
     </div>
+        <div class="content hidden" id="approvedStores">
+    <h1>Approved Stores</h1>
+    @if($approvedStores->count() > 0)
+    <table>
+        <thead>
+            <tr>
+            <th>User ID</th>
+                <th>User Name</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($approvedStores as $store)
+            <tr>
+            <td>{{ $store->user->id }}</td>
+             <td>{{ $store->user->name }}</td>
+                <td>{{ $store->name }}</td>
+                <td>{{ $store->description }}</td>
+                <td>{{ $store->status }}</td>
+                <td>
+                <form action="{{ route('admin.activateStore', $store->id) }}" method="POST">
+    @csrf
+    <button type="submit">Activate</button>
+</form>
+<form action="{{ route('admin.deactivateStore', $store->id) }}" method="POST">
+    @csrf
+    <button type="submit">Deactivate</button>
+</form>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+    @else
+    <div class="empty_img">
+        <img src="{{ asset('images/ohno.jpg') }}" alt="">
+        <h1>No approved stores found.</h1>
+    </div>
+    @endif
+</div>
+    
 
     <script>
         // Function to show pending requests
@@ -247,6 +290,7 @@
         document.getElementById('pendingRequests').classList.remove('hidden');
         document.getElementById('createCategories').classList.add('hidden');
         document.getElementById('viewCategories').classList.add('hidden');
+        document.getElementById('approvedStores').classList.add('hidden');
     }
 
     // Function to show create categories
@@ -254,6 +298,7 @@
         document.getElementById('createCategories').classList.remove('hidden');
         document.getElementById('pendingRequests').classList.add('hidden');
         document.getElementById('viewCategories').classList.add('hidden');
+        document.getElementById('approvedStores').classList.add('hidden');
     }
 
     // Function to show view categories
@@ -261,6 +306,13 @@
         document.getElementById('viewCategories').classList.remove('hidden');
         document.getElementById('createCategories').classList.add('hidden');
         document.getElementById('pendingRequests').classList.add('hidden');
+        document.getElementById('approvedStores').classList.add('hidden');
+    }
+    function showApprovedStores() {
+        document.getElementById('approvedStores').classList.remove('hidden');
+        document.getElementById('createCategories').classList.add('hidden');
+        document.getElementById('pendingRequests').classList.add('hidden');
+        document.getElementById('viewCategories').classList.add('hidden'); // Hide view categories
     }
     </script>
 

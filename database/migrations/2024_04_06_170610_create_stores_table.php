@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('status')->default('approved');
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }
