@@ -23,7 +23,11 @@
                 <li><a href="{{ route('product', ['id' => $userId]) }}">Products</a></li>
                 <li><a href="">About</a></li>
                 <li><a href="">Contact</a></li>
-                <li><a href="{{ route('account') }}">Account</a></li>
+                @auth
+                        <li><a href="{{ route('logout') }}">signout</a></li>
+                    @else
+                        <li><a href="{{ route('account') }}">Account</a></li>
+                    @endauth
                 <!-- Add a link to see events -->
                 <li><a href="{{ route('event.buyereventshow', ['userId' => $userId]) }}">See Events</a></li>
             </ul>

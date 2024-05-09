@@ -41,6 +41,8 @@ Route::get('/profile/{userId}/edit', [ProfileController::class, 'edit'])->name('
 Route::put('/profile/{userId}/update', [ProfileController::class, 'update'])->name('profile.update'); // Process profile update form submission
 Route::get("profile", [WebsiteController::class, 'getprofile'])->name('profile'); // Show user profile
 
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');//logout 
+
 // Email verification route
 Route::get('verify/email/{token}', [VerificationController::class, 'verifyEmail'])->name('email.verify'); // Verify email address
 

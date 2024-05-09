@@ -25,7 +25,7 @@ class LoginController extends Controller
             if ($user->verified) {
                 // Check if the user is a "seller"
                 if ($user->role === 'seller') {
-                    return redirect()->route('chooseaction',['id' => $user->id]);
+                    return redirect()->route('chooseaction', ['id' => $user->id]);
                 }
 
                 // If not a "seller", redirect to the default page (product route in this case)
@@ -40,7 +40,19 @@ class LoginController extends Controller
         // If the email or password is incorrect, redirect them back with an error message
         return redirect()->back()->withErrors(['login_failed' => 'Invalid email or password']);
     }
-    
+
+    public function logout(Request $request)
+    {
+        // Log the user out
+        Auth::logout();
+
+        // Invalidate the session
+        $request->session()->invalidate();
+
+        // Redirect the user to the login page
+        return redirect('/login');
+    }
+
     public function redirectToGoogle()
     {
         return Socialite::driver('google')->redirect();
