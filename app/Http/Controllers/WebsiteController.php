@@ -41,7 +41,9 @@ class WebsiteController extends Controller
         $user = User::find($id);
 
         // Return the product view
-        return view('product', ['userId' => $user]);
+        return view('product', [
+            'userId' => $user
+        ]);
     }
 
     //show product detail view

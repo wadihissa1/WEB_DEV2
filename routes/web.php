@@ -49,6 +49,10 @@ Route::get('verify/email/{token}', [VerificationController::class, 'verifyEmail'
 // Choose action route
 Route::get('/chooseaction/{id}', [ChooseActionController::class, 'index'])->name('chooseaction'); // Show choose action page
 
+//botman 
+Route::match(['get','post'],'/botman', 'App\Http\Controllers\BotManController@handle');
+
+
 // Follow/unfollow routes
 Route::post('store/{store}/follow', [FollowController::class, 'follow'])->name('users.follow'); // Follow a store
 Route::post('store/{store}/unfollow', [FollowController::class, 'unfollow'])->name('users.unfollow'); // Unfollow a store

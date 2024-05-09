@@ -192,6 +192,19 @@
     }
 </script>
 
+<script>
+    var botmanWidget = {
+        aboutText: 'Start the conversation with Hi',
+        introMessage: "WELCOME TO REDSTORE",
+        mainColor: "#ff523b",
+        bubbleBackground: "#ff523b",
+    };
+</script>
+
+<script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
+
+
+
 </body>
 
 </html>

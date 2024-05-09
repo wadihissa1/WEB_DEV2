@@ -40,7 +40,9 @@
             text-align: left;
         }
 
-        td{
+        td {
+            max-width: 300px;
+            overflow: hidden;
             font-weight: 900;
             max-width: 300px;
             overflow: hidden;
