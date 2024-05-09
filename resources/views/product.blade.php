@@ -26,7 +26,7 @@
                 <li><a href="{{ route('account') }}">Account</a></li>
             </ul>
         </nav>
-        <a href="{{ route('cart') }}"><img src="images/cart.png" width="30px" height="30px"></a>
+        
         <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
     </div>
 </div>

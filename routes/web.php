@@ -12,7 +12,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\ReviewController;
-
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +38,7 @@ Route::get("index", [WebsiteController::class, 'getindex'])->name('index');
 Route::get("account", 'App\Http\Controllers\WebsiteController@getaccount')->name('account');
  
  
-Route::get("cart", 'App\Http\Controllers\WebsiteController@getcart')->name('cart');
+//Route::get("cart", 'App\Http\Controllers\WebsiteController@getcart')->name('cart');
  
  
 Route::get("product/{id}", 'App\Http\Controllers\WebsiteController@getproduct')->name('product');
@@ -141,12 +142,12 @@ Route::post('/store', [StoreController::class, 'store'])->name('stores.store');
 
 //tell wadih about the change from view to show
 Route::get('/viewstore/{store}', [StoreController::class, 'show'])->name('viewstore');
-Route::get('/viewstore/{store}', [StoreController::class, 'view'])->name('viewstore');
+Route::get('/viewstore/{store}', [StoreController::class, 'view'])->name('viewstore.a');
 
 
 
 // Route to view all stores for the current user
-Route::get('/viewallstores/{id}', [StoreController::class, 'viewAllStores'])->name('viewallstores');
+Route::get('/viewallstores/{id}', [StoreController::class, 'viewAllStores'])->name('viewallstores.a');
 Route::get('/createproduct/{storeId}', [ProductController::class, 'create'])->name('createproduct');
 Route::post('/storeproduct', [ProductController::class, 'store'])->name('storeproduct');
 // Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
@@ -180,7 +181,7 @@ Route::get('/viewstore/{store}', [StoreController::class, 'show'])->name('viewst
  
  
 // Route to view all stores for the current user
-Route::get('/viewallstores', [StoreController::class, 'viewAllStores'])->name('viewallstores');
+Route::get('/viewallstores', [StoreController::class, 'viewAllStores'])->name('viewallstores.b');
  
  
  
@@ -191,3 +192,13 @@ Route::get('/viewallstores', [StoreController::class, 'viewAllStores'])->name('v
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 Route::post('/admin/approve/{storeRequest}', [AdminController::class, 'approveRequest'])->name('admin.approveRequest');
 Route::post('/admin/reject/{storeRequest}', [AdminController::class, 'rejectRequest'])->name('admin.rejectRequest');
+
+Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
+Route::post('/cart/add/{productId}', [CartController::class, 'addToCart'])->name('cart.add');
+Route::post('/cart/update/{productId}', [CartController::class, 'updateCart'])->name('cart.update');
+Route::post('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
+
+Route::post('/orders/store', [OrderController::class, 'store'])->name('orders.store');
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+
+Route::post('/cart/convert', [CartController::class, 'convertCurrency'])->name('cart.convert');
