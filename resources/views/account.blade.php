@@ -54,9 +54,10 @@
 
                             <button type="submit" class="btn">Login</button>
 
-                            <a href="#">Forget Password</a>
+                            <a href="{{ route('forgot.password') }}">Forgot password?</a>
 
-                            <a href="{{ route('auth/google') }}" class="btn btn-google"> 
+
+                            <a href="{{ route('auth/google') }}" class="btn btn-google">
                                 <i class="fab fa-google"></i>Sign in with Google</a>
 
                         </form>
@@ -77,7 +78,7 @@
                             </select>
 
                             <button type="submit" class="btn">Register</button>
-                            
+
                         </form>
 
                     </div>
