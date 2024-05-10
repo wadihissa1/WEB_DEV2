@@ -32,5 +32,12 @@ class CategoryController extends Controller
     $categories = Category::all();
     return view('viewcategories', ['categories' => $categories]);
 }
+public function destroy($id)
+{
+    $category = Category::findOrFail($id);
+    $category->delete();
 
+    // return redirect()->route('viewcategories')->with('success', 'Category deleted successfully.');
+    return redirect()->back();
+}
 }
