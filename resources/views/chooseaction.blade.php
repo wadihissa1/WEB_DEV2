@@ -23,7 +23,7 @@
             border-radius: 20px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
             width: 400px;
-            height:250px;
+            height:fit-content;
             margin: 90px auto;
             border: 2px solid #2b282825;
             background: radial-gradient(#fff, #ffd6d6);
@@ -82,7 +82,12 @@
     <!-- Create Store Button -->
     <a class="btn" href="{{ route('createstore', ['id' => $userId]) }}">Create Store</a>
 
+    <!-- Create Event Button -->
     <a class="btn" href="{{ route('events.create', ['id' => $userId]) }}">Create Event</a>
+
+    <!-- see Chats Button -->
+    <a class="btn" href="/messages/view/{{ $userId }}">View Chats</a>
+
 </form>
 
 </body>

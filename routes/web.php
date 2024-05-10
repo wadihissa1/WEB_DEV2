@@ -15,6 +15,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ChooseActionController;
 use App\Http\Controllers\VerificationController;
@@ -265,3 +266,8 @@ Route::get('/payment/cancel', [PaymentController::class, 'paymentCancel'])->name
 //Cryptopayment getaways (Coinbase)
 
 Route::post('/payment/create-charge', [CryptoPaymentController::class, 'createCharge'])->name('payment.create');
+
+
+//messaging routes
+Route::get('/messages/view/{id}', [MessagesController::class, 'index'])->name('sellerchat');
+Route::post('/messages/store', [MessagesController::class, 'store'])->name('messages.store');
