@@ -1,6 +1,6 @@
 @extends('layout')
 @section('content')
-    
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -116,9 +116,14 @@
         </div>
         <!-- Add hidden input for store_id -->
         <input type="hidden" name="store_id" value="{{ $store->id }}">
-        
+
         <button type="submit">Create Product</button>
     </form>
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 </body>
 </html>
 @endsection
