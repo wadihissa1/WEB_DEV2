@@ -16,7 +16,7 @@ class OrderController extends Controller
         $orders = Order::all();
 
         // Return the orders data as a JSON response
-        return response()->json($orders);
+        return view('payments.form');
     }
 
 

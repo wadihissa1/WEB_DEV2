@@ -168,6 +168,9 @@
         background-color: #00000090;
         padding: 45px;
     }
+    .col-4 img {
+    height: 440px;
+}
     </style>
 </head>
 

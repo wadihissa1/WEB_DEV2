@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RedStore | Ecommerce Website Design</title>
+    <title>RedStore | Ecommerce Website</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
@@ -22,11 +22,10 @@
                 <nav>
                     <ul id="MenuItems">
                         <li><a href="{{ route('index') }}">Home</a></li>
-                        <li><a href="">Products</a></li>
-                        <li><a href="">About</a></li>
-                        <li><a href="">Contact</a></li>
+                        <li><a href="/product/{{ $userId }}">Products</a></li>
                         @auth
                         <li><a href="{{ route('logout') }}">signout</a></li>
+                        <li><a href="{{ route('event.buyereventshow', ['userId' => $userId]) }}">See Events</a></li>
                         @else
                         <li><a href="{{ route('account') }}">Account</a></li>
                         @endauth
@@ -47,7 +46,7 @@
         <div class="container">
             <div class="row">
                 <div class="footer-col-2">
-                    <img src="images/logo-white.png">
+                    <img src="{{ asset('images/logo-white.png') }}">
                     <p>Our Purpose Is To Sustainably Make the Pleasure and Benefits of Sports Accessible to the Many.
                     </p>
                 </div>

@@ -50,7 +50,7 @@ class LoginController extends Controller
         $request->session()->invalidate();
 
         // Redirect the user to the login page
-        return redirect('/login');
+        return redirect('/account');
     }
 
     public function redirectToGoogle()
