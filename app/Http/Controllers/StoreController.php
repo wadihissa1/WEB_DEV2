@@ -62,7 +62,6 @@ class StoreController extends Controller
     // Get only the approved and active stores
     $userStores = Store::where('user_id', $user->id)
         ->where('status', 'approved')
-        ->where('active', true)
         ->get();
 
     return view('viewallstore', [

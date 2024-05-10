@@ -150,6 +150,27 @@
             background-color: #337ab7;
             border-color: #337ab7;
         }
+        .button {
+        width: fit-content;
+        background-color: rebeccapurple;
+        color: #fff;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    .follow {
+        display: flex;
+        justify-content: end;
+        margin-right: 20px;
+    }
+
+    .container_head {
+        background-color: #00000090;
+        padding: 45px;
+    }
+    .col-4 img {
+    height: 440px;
+}
     </style>
 </head>
 
@@ -180,21 +201,14 @@
         <div class="row">
             <h1>Newest Releases:</h1>
 
-        <div>
-
-            <div class="row">
-
-                <h1>Newest Releases:</h1>
-
-                @foreach ($products as $product)
-                <div class="col-4">
-                    <a href="/product_details/{{ $product->id}}"><img src="{{ asset('images/product-1.jpg') }}"></a>
-                    <center>
-                        <h3>{{ $product->name }}</h3>
-                    </center>
-                </div>
-                @endforeach
-
+            @foreach ($products as $product)
+            <div class="col-4">
+                <a href="/viewstore/{{ $product->id }}"><img src="{{ asset('images/product-1.jpg') }}" alt="Product Image"></a>
+                <h3>{{ $product->name }}</h3>
+                <form method="post" action="{{ route('cart.add', ['productId' => $product->id]) }}">
+                    @csrf
+                    <button type="submit" class="button">Add to Cart</button>
+                </form>
             </div>
 
         </div>

@@ -1,47 +1,76 @@
+@extends('layout')
+@section('content')
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Products | RedStore</title>
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <title>RedStore | Ecommerce Products</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet">
+        rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
+<style>
+    .cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+ }
+ 
+.card {
+    width:250px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    flex: 1 1 150px;
+    border: 2px solid rgb(225, 225, 225);
+    border-radius: 30px;
+    background-color: #ffffffb0;
+    color: #ff523b;
+    box-sizing: border-box;
+    margin: 1rem .25em;
+    transition: .5s;
+}
+.product-image{
+    width: 150px
+}
+</style>
 <body>
-<div class="container">
-    <div class="navbar">
-        <div class="logo">
-            <a href="{{ route('index') }}"><img src="images/logo.png" alt="logo" width="125px"></a>
-        </div>
-        <nav>
-            <ul id="MenuItems">
-                <li><a href="{{ route('index') }}">Home</a></li>
-                <li><a href="{{ route('product', ['id' => $userId]) }}">Products</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="">Contact</a></li>
-                <li><a href="{{ route('account') }}">Account</a></li>
-
-                <li><a href="{{ route('event.buyereventshow', ['userId' => $userId]) }}">See Events</a></li>
-            </ul>
-        </nav>
-
-        <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
-    </div>
-</div>
 
 <!-- All Products -->
-<!-- Your existing code for displaying products -->
-
-<!-- Footer -->
-<!-- Your existing footer section -->
-
-<!-- JavaScript -->
-<!-- Your existing JavaScript code -->
+<h1 class="title">All Products :</h1>
+    <div class="cards">
+    @foreach($randomProducts as $product)
+    <a href="/product_details/{{ $product->id }}">
+                <div class="card">
+        <img  src="{{ asset('images\product-2.jpg')}}" alt="Product Image" class="product-image">
+        <div class="product-details">
+            <h2>{{ $product->name }}</h2>
+            <p>{{ $product->description }}</p>
+            <br>
+            <p>Price: ${{ $product->price }}</p>
+            <p>Quantity: {{ $product->quantity }}</p>
+            <br><br>
+            <p>Category: {{ $product->category->name}}</p>
+        </div>
+    </div>
+    </a>   
+    @endforeach
+    <div class="paginate">
+        {{$randomProducts->links()}}
+    </div>
+</div>
 
 </body>
 
 </html>
+@endsection

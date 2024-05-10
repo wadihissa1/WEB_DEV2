@@ -1,24 +1,27 @@
 <?php
 
-use App\Http\Controllers\BidController;
-use App\Http\Controllers\ForgotPasswordController;
-use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\VerificationController;
-use App\Http\Controllers\ChooseActionController;
-use App\Http\Controllers\StoreController;
+use App\Http\Controllers\BidController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\FollowController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\WebsiteController;
-use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\StoreController;
+use App\Http\Controllers\FollowController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WebsiteController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MessagesController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ChooseActionController;
+use App\Http\Controllers\VerificationController;
+use App\Http\Controllers\CryptoPaymentController;
+use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +39,7 @@ Route::get('/', fn() => view('account'))->name('account'); // Show account view
 Route::get("index", [WebsiteController::class, 'getindex'])->name('index'); // Show index view
 Route::get("account", [WebsiteController::class, 'getaccount'])->name('account'); // Show account view
 Route::get("cart", [WebsiteController::class, 'getcart'])->name('cart'); // Show cart view
-Route::get("product/{id}", [WebsiteController::class, 'getproduct'])->name('product'); // Show product details
+Route::get("product/{id}", [WebsiteController::class, 'getproduct'])->name('product'); // Show products
 Route::get("product_details/{id}", [WebsiteController::class, 'getproduct_details'])->name('product_details'); // Show product details
 Route::post('/login', [LoginController::class, 'login'])->name('login'); // Process login form submission
 Route::post('/register', [RegisterController::class, 'register'])->name('register'); // Process registration form submission
@@ -45,6 +48,8 @@ Route::get('auth/google/callback', [LoginController::class, 'handleGoogleCallbac
 Route::get('/profile/{userId}/edit', [ProfileController::class, 'edit'])->name('profile.edit'); // Show profile edit form
 Route::put('/profile/{userId}/update', [ProfileController::class, 'update'])->name('profile.update'); // Process profile update form submission
 Route::get("profile", [WebsiteController::class, 'getprofile'])->name('profile'); // Show user profile
+
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');//logout 
 
 // Email verification route
 Route::get('verify/email/{token}', [VerificationController::class, 'verifyEmail'])->name('email.verify'); // Verify email address
@@ -246,6 +251,24 @@ Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
 Route::post('/cart/add/{productId}', [CartController::class, 'addToCart'])->name('cart.add');
 Route::post('/cart/update/{productId}', [CartController::class, 'updateCart'])->name('cart.update');
 Route::post('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
+
+
+
+
 Route::post('/orders/store', [OrderController::class, 'store'])->name('orders.store');
 Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
 Route::post('/cart/convert', [CartController::class, 'convertCurrency'])->name('cart.convert');
+
+//payment getaways (Stripe)
+Route::post('/pay', [PaymentController::class, 'pay'])->name('pay');
+Route::get('/payment/success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
+Route::get('/payment/cancel', [PaymentController::class, 'paymentCancel'])->name('payment.cancel');
+
+//Cryptopayment getaways (Coinbase)
+
+Route::post('/payment/create-charge', [CryptoPaymentController::class, 'createCharge'])->name('payment.create');
+
+
+//messaging routes
+Route::get('/messages/view/{id}', [MessagesController::class, 'index'])->name('sellerchat');
+Route::post('/messages/store', [MessagesController::class, 'store'])->name('messages.store');

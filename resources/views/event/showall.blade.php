@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('content')
+
     <a href="/viewallstores/{id}" class="btn btn-primary">Go Back to Stores</a>
     <h1>Events for Store</h1>
 

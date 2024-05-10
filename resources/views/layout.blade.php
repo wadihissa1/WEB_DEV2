@@ -1,40 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>RedStore | Ecommerce Website Design</title>
-        <link rel="stylesheet" href="{{asset('css/style.css')}}">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-              rel="stylesheet">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    </head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RedStore | Ecommerce Website</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
 <body>
     <div class="header">
         <div class="container">
             <div class="navbar">
                 <div class="logo">
-                        <a href="{{ route('index') }}"><img src="{{ asset('images/logo.png') }}" alt="logo" width="125px"></a>
+                    <a href="{{ route('index') }}"><img src="{{ asset('images/logo.png') }}" alt="logo"
+                            width="125px"></a>
                 </div>
                 <nav>
                     <ul id="MenuItems">
                         <li><a href="{{ route('index') }}">Home</a></li>
-                        <li><a href="">Products</a></li>
-                        <li><a href="">About</a></li>
-                        <li><a href="">Contact</a></li>
+                        <li><a href="/product/{{ $userId }}">Products</a></li>
+                        @auth
+                        <li><a href="{{ route('logout') }}">signout</a></li>
+                        <li><a href="{{ route('event.buyereventshow', ['userId' => $userId]) }}">See Events</a></li>
+                        @else
                         <li><a href="{{ route('account') }}">Account</a></li>
+                        @endauth
                     </ul>
                 </nav>
-
+                <a href="{{ route('cart.show') }}"><img src="{{ asset('images/cart.png') }}" width="30px" height="30px"></a>
                 <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
             </div>
-           
+
         </div>
     </div>
 
     <div>
-    @yield('content')
-    </div> 
+        @yield('content')
+    </div>
 
     <div class="footer">
         <div class="container">
@@ -63,10 +69,9 @@
                     </ul>
                 </div>
             </div>
-            <hr>
-            <p class="copyright">Copyright 2024</p>
         </div>
     </div>
-    
+
 </body>
+
 </html>

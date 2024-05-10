@@ -62,4 +62,20 @@ class User extends Authenticatable
         return $this->hasMany(Bid::class);
     }
 
+
+    /**
+     * Get the messages sent by this user.
+     */
+    public function sentMessages()
+    {
+        return $this->hasMany(Message::class, 'sender_id');
+    }
+
+    /**
+     * Get the messages received by this user.
+     */
+    public function receivedMessages()
+    {
+        return $this->hasMany(Message::class, 'receiver_id');
+    }
 }

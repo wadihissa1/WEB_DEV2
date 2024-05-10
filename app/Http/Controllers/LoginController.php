@@ -41,6 +41,18 @@ class LoginController extends Controller
         return redirect()->back()->withErrors(['login_failed' => 'Invalid email or password']);
     }
 
+    public function logout(Request $request)
+    {
+        // Log the user out
+        Auth::logout();
+
+        // Invalidate the session
+        $request->session()->invalidate();
+
+        // Redirect the user to the login page
+        return redirect('/account');
+    }
+
     public function redirectToGoogle()
     {
         return Socialite::driver('google')->redirect();

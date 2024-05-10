@@ -39,10 +39,13 @@ class WebsiteController extends Controller
     public function getproduct($id)
     {
         $user = User::find($id);
+        $randomProducts = Product::inRandomOrder()->simplepaginate(5);
+
 
         // Return the product view
         return view('product', [
-            'userId' => $user
+            'userId' => $user,
+            'randomProducts' => $randomProducts,
         ]);
     }
 

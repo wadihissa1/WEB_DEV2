@@ -1,3 +1,10 @@
+
+@extends('layout')
+@section('content')
+    
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -160,3 +167,4 @@
     @endif
 </body>
 </html>
+@endsection
